@@ -1,4 +1,4 @@
-#!/Users/spark/Box_main_cursus/11_python_piscine/hospark_forked/rush00_venv/bin/python
+#!/Users/hopark/Desktop/hopark/django/hospark_fork/rush00_venv/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
