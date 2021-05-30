@@ -1,28 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-
-<head>
-    <meta charset="UFT-8">
-    {% block title%}{% endblock %}
-    {% block style%}
-    {% endblock %}
+  <head>
+    <meta charset="UFT-8" />
+    {% block title%}{% endblock %} {% block style%} {% endblock %}
+    <script src="{% static 'keyevent.js' %}"></script>
     <style>
-        .container {
-            background-image: url('https://mario.wiki.gallery/images/1/1f/GBA_Handheld.png?download');
-            background-size: 1600px 1000px;
-            background-repeat: no-repeat;
-            width: 1600px;
-            height: 1000px;
-        }
+      .container {
+        background-image: url("https://mario.wiki.gallery/images/1/1f/GBA_Handheld.png?download");
+        background-size: 1600px 1000px;
+        background-repeat: no-repeat;
+        width: 1600px;
+        height: 1000px;
+      }
     </style>
-</head>
+  </head>
 
-<body class="container">
+  <body class="container">
     {% include 'key.html' %}
+<<<<<<< HEAD
     <div style="width: 687px; height: 490px; position: absolute; top:190px; left:450px; background-color: rgb(172, 166, 166);">
         {% block content%}{% endblock %}
+=======
+    <div
+      style="
+        width: 687px;
+        height: 490px;
+        position: absolute;
+        top: 190px;
+        left: 450px;
+      "
+    >
+      {% block content%}{% endblock %}
+>>>>>>> 08665e4badb34506e33180e89786bd8d3b3edbf9
     </div>
-</body>
-
+  </body>
 </html>

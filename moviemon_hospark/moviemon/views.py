@@ -1,7 +1,6 @@
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
-# from movie_data.movie_total import
-
+from .movie_data import movie_total
 # Create your views here.
 
 memu = 0
@@ -50,6 +49,7 @@ def get_id(request):
         press_Select()
     return redirect(request.path)
 
+
 def Titlescreen(request):
     id = request.GET.get('key', None)
     if id is not None:
@@ -58,7 +58,6 @@ def Titlescreen(request):
 
 def Worldmap(request):
     id = request.GET.get('key', None)
-    print("[", request.path, "]", id)
     if id is not None:
         return get_id(request)
     return render(request, 'pages/Worldmap.html')
