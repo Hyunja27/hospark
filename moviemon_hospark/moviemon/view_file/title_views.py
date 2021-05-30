@@ -18,7 +18,7 @@ def press_A(request):
         print(context)
         return render(request, 'pages/Titlescreen.html', context)
     print("A")
-    return Titlescreen(request)
+    return render(request, 'pages/Worldmap.html')
 
 
 def press_B(request):
