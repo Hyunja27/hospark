@@ -39,6 +39,7 @@ def press_Select():
 
 def get_id(request):
     id = request.GET.get('key', None)
+<<<<<<< HEAD
     if id == "up":
         press_up(request)
     elif id == "left":
@@ -57,6 +58,26 @@ def get_id(request):
         press_Select()
     return redirect(request.path)
 
+=======
+    if id is not None:
+        if id == "up":
+            press_up
+        elif id == "left":
+            press_left()
+        elif id == "right":
+            press_right()
+        elif id == "down":
+            press_down()
+        elif id == "A":
+            press_A()
+        elif id == "B":
+            press_B()
+        elif id == "Start":
+            press_Start()
+        elif id == "Select":
+            press_Select()
+    
+>>>>>>> 3c5c58e3f0fa8c7a2fcca4720b8d50907e9a5704
 
 def Titlescreen(request):
     id = request.GET.get('key', None)

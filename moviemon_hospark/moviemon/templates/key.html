@@ -2,23 +2,20 @@
 
 {% block style%}
 		<style>
-			{% comment %} table{
-				position: fixed;
-    			bottom: 0;
-    			width:100%;
-    			height:100px;
-			} {% endcomment %}
+			a {
+				display: block;
+			}
 		</style>
 {% endblock %}
 {% block from %}
-        {% csrf_token %}
-        {{ form.as_p }}
-	<a href="{{ request.path }}?key=up">up</a>
-	<a href="{{ request.path }}?key=left">left</a>
-	<a href="{{ request.path }}?key=right">right</a>
-	<a href="{{ request.path }}?key=down">down</a>
-	<a href="{{ request.path }}?key=A">A</a>
-	<a href="{{ request.path }}?key=B">B</a>
-	<a href="{{ request.path }}?key=Start">Start</a>
-	<a href="{{ request.path }}?key=Select">Select</a>
+		{% csrf_token %}
+		{{ form.as_p }}
+	<a style=" position: absolute; top: 140px; left: 82px; width:40px; height:40px" href="{{ request.path }}?key=up"></a>
+	<a style=" position: absolute; top: 176px; left: 43px; width:40px; height:40px" href="{{ request.path }}?key=left"></a>
+	<a style=" position: absolute; top: 176px; left: 120px; width:40px; height:40px" href="{{ request.path }}?key=right"></a>
+	<a style=" position: absolute; top: 216px; left: 82px; width:40px; height:40px" href="{{ request.path }}?key=down"></a>
+	<a style=" position: absolute; top: 156px; left: 693px; width:80px; height:80px" href="{{ request.path }}?key=A"></a>
+	<a style=" position: absolute; top: 186px; left: 610px; width:80px; height:80px" href="{{ request.path }}?key=B"></a>
+	<a style=" position: absolute; top: 296px; left: 135px; width:40px; height:40px" href="{{ request.path }}?key=Start"></a>
+	<a style=" position: absolute; top: 345px; left: 135px; width:40px; height:40px" href="{{ request.path }}?key=Select"></a>
 {% endblock %}
