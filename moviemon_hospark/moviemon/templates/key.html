@@ -1,21 +1,25 @@
 {% load static %}
 
 {% block style%}
-		<style>
-			a {
-				display: block;
-			}
-		</style>
+<style>
+    a {
+        display: block;
+        /* background-color: crimson; */
+        position: absolute;
+        width: 110px;
+        height: 110px;
+    }
+</style>
 {% endblock %}
 {% block from %}
-		{% csrf_token %}
-		{{ form.as_p }}
-	<a style=" position: absolute; top: 140px; left: 82px; width:40px; height:40px" href="{{ request.path }}?key=up"></a>
-	<a style=" position: absolute; top: 176px; left: 43px; width:40px; height:40px" href="{{ request.path }}?key=left"></a>
-	<a style=" position: absolute; top: 176px; left: 120px; width:40px; height:40px" href="{{ request.path }}?key=right"></a>
-	<a style=" position: absolute; top: 216px; left: 82px; width:40px; height:40px" href="{{ request.path }}?key=down"></a>
-	<a style=" position: absolute; top: 156px; left: 693px; width:80px; height:80px" href="{{ request.path }}?key=A"></a>
-	<a style=" position: absolute; top: 186px; left: 610px; width:80px; height:80px" href="{{ request.path }}?key=B"></a>
-	<a style=" position: absolute; top: 296px; left: 135px; width:40px; height:40px" href="{{ request.path }}?key=Start"></a>
-	<a style=" position: absolute; top: 345px; left: 135px; width:40px; height:40px" href="{{ request.path }}?key=Select"></a>
+{% csrf_token %}
+{{ form.as_p }}
+ <a style=" top: 250px; left: 147px;" href="{{ request.path }}?key=up"></a>
+ <a style=" top: 340px; left: 58px;" href="{{ request.path }}?key=left"></a>
+ <a style=" top: 340px; left: 235px;" href="{{ request.path }}?key=right"></a>
+ <a style=" top: 430px; left: 147px;" href="{{ request.path }}?key=down"></a>
+ <a style=" top: 306px; left: 1360px; width:160px; height:160px" href="{{ request.path }}?key=A"></a>
+ <a style=" top: 376px; left: 1190px; width:160px; height:160px" href="{{ request.path }}?key=B"></a>
+ <a style=" top: 570px; left: 260px; width:100px; height:100px" href="{{ request.path }}?key=Start"></a>
+ <a style=" top: 680px; left: 250px; width:100px; height:100px" href="{{ request.path }}?key=Select"></a>
 {% endblock %}

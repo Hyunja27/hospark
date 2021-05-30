@@ -3,38 +3,31 @@ from django.shortcuts import render, redirect
 from .movie_data import movie_total
 # Create your views here.
 
+memu = 0
 
 def press_up(request):
     print("up")
 
-
 def press_left():
     print("left")
-
 
 def press_right():
     print("right")
 
-
 def press_down():
     print("down")
-
 
 def press_A():
     print("A")
 
-
 def press_B():
     print("B")
-
 
 def press_Start():
     print("Start")
 
-
 def press_Select():
     print("Select")
-
 
 def get_id(request):
     id = request.GET.get('key', None)
@@ -63,13 +56,11 @@ def Titlescreen(request):
         return get_id(request)
     return render(request, 'pages/Titlescreen.html')
 
-
 def Worldmap(request):
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
     return render(request, 'pages/Worldmap.html')
-
 
 def Battle(request):
     id = request.GET.get('key', None)
@@ -77,13 +68,11 @@ def Battle(request):
         return get_id(request)
     return render(request, 'pages/Battle.html')
 
-
 def Moviedex(request):
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
     return render(request, 'pages/Moviedex.html')
-
 
 def Detail(request):
     id = request.GET.get('key', None)
@@ -91,20 +80,17 @@ def Detail(request):
         return get_id(request)
     return render(request, 'pages/Moviedex.html')
 
-
 def Option(request):
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
     return render(request, 'pages/Options.html')
 
-
 def Save(request):
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
     return render(request, 'pages/options/save_game.html')
-
 
 def Load(request):
     id = request.GET.get('key', None)
