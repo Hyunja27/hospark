@@ -1,4 +1,15 @@
 {% load static %}
+
+{% block style%}
+		<style>
+			{% comment %} table{
+				position: fixed;
+    			bottom: 0;
+    			width:100%;
+    			height:100px;
+			} {% endcomment %}
+		</style>
+{% endblock %}
 {% block from %}
         {% csrf_token %}
         {{ form.as_p }}

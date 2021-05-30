@@ -4,11 +4,23 @@
 	<head>
 		<meta charset="UFT-8">
 		{% block title%}{% endblock %}
-		{% block style%}{% endblock %}
+		{% block style%}
+		{% endblock %}
+		<style>
+		.container {
+			background-image: url('https://mario.wiki.gallery/images/1/1f/GBA_Handheld.png?download');
+			background-size: 800px 500px;
+			background-repeat: no-repeat;
+			/* width: 500px; 
+			height: 350px;  */
+		}
+		</style>
 	</head>
-	<body>
+	<body class="container">
 		{% include 'key.html' %}
-		{% block content%}{% endblock %}
+		<div>
+			{% block content%}{% endblock %}
+		</div>
 	</body>
 </html>
 

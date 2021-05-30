@@ -1,5 +1,6 @@
 from tkinter.constants import NO
 from django.shortcuts import render
+# from movie_data.movie_total import
 
 # Create your views here.
 
@@ -95,6 +96,9 @@ def Save(request):
 def Load(request):
     get_id(request)
     return render(request, 'pages/options/load_game.html')
+
+def start(request):
+    return render(request, 'pages/Titlescreen.html')
 
 # def up(request) :
     # get_id(request)
