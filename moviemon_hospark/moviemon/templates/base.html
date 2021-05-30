@@ -8,15 +8,17 @@
 		{% endblock %}
 		<style>
 		.container {
-			background-image: url('https://static.displate.com/857x1200/displate/2020-01-09/228c7dcb7fe88ced0105287c34d6b95a_ea47567da117cc543dc747b819cc6f12.jpg');
-			width: 1280px; 
-			height: 720px; 
+			background-image: url('https://mario.wiki.gallery/images/1/1f/GBA_Handheld.png?download');
+			background-size: 800px 500px;
+			background-repeat: no-repeat;
+			/* width: 500px; 
+			height: 350px;  */
 		}
 		</style>
 	</head>
-	<body>
+	<body class="container">
 		{% include 'key.html' %}
-		<div class="container">
+		<div>
 			{% block content%}{% endblock %}
 		</div>
 	</body>

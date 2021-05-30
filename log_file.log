@@ -1,10 +1,4 @@
-Collecting pip
-  Using cached https://files.pythonhosted.org/packages/cd/82/04e9aaf603fdbaecb4323b9e723f13c92c245f6ab2902195c53987848c78/pip-21.1.2-py3-none-any.whl
-Installing collected packages: pip
-  Found existing installation: pip 19.2.3
-    Uninstalling pip-19.2.3:
-      Successfully uninstalled pip-19.2.3
-Successfully installed pip-21.1.2
+Requirement already satisfied: pip in ./rush00_venv/lib/python3.8/site-packages (21.1.2)
 Collecting asgiref==3.3.4
   Using cached asgiref-3.3.4-py3-none-any.whl (22 kB)
 Collecting beautifulsoup4==4.9.3
@@ -27,6 +21,46 @@ Collecting sqlparse==0.4.1
   Using cached sqlparse-0.4.1-py3-none-any.whl (42 kB)
 Using legacy 'setup.py install' for bs4, since package 'wheel' is not installed.
 Installing collected packages: soupsieve, sqlparse, pytz, beautifulsoup4, asgiref, psycopg2-binary, path, install, Django, bs4
+  Attempting uninstall: soupsieve
+    Found existing installation: soupsieve 2.2.1
+    Uninstalling soupsieve-2.2.1:
+      Successfully uninstalled soupsieve-2.2.1
+  Attempting uninstall: sqlparse
+    Found existing installation: sqlparse 0.4.1
+    Uninstalling sqlparse-0.4.1:
+      Successfully uninstalled sqlparse-0.4.1
+  Attempting uninstall: pytz
+    Found existing installation: pytz 2021.1
+    Uninstalling pytz-2021.1:
+      Successfully uninstalled pytz-2021.1
+  Attempting uninstall: beautifulsoup4
+    Found existing installation: beautifulsoup4 4.9.3
+    Uninstalling beautifulsoup4-4.9.3:
+      Successfully uninstalled beautifulsoup4-4.9.3
+  Attempting uninstall: asgiref
+    Found existing installation: asgiref 3.3.4
+    Uninstalling asgiref-3.3.4:
+      Successfully uninstalled asgiref-3.3.4
+  Attempting uninstall: psycopg2-binary
+    Found existing installation: psycopg2-binary 2.8.6
+    Uninstalling psycopg2-binary-2.8.6:
+      Successfully uninstalled psycopg2-binary-2.8.6
+  Attempting uninstall: path
+    Found existing installation: path 15.1.2
+    Uninstalling path-15.1.2:
+      Successfully uninstalled path-15.1.2
+  Attempting uninstall: install
+    Found existing installation: install 1.3.4
+    Uninstalling install-1.3.4:
+      Successfully uninstalled install-1.3.4
+  Attempting uninstall: Django
+    Found existing installation: Django 3.2.3
+    Uninstalling Django-3.2.3:
+      Successfully uninstalled Django-3.2.3
+  Attempting uninstall: bs4
+    Found existing installation: bs4 0.0.1
+    Uninstalling bs4-0.0.1:
+      Successfully uninstalled bs4-0.0.1
     Running setup.py install for bs4: started
     Running setup.py install for bs4: finished with status 'done'
 Successfully installed Django-3.2.3 asgiref-3.3.4 beautifulsoup4-4.9.3 bs4-0.0.1 install-1.3.4 path-15.1.2 psycopg2-binary-2.8.6 pytz-2021.1 soupsieve-2.2.1 sqlparse-0.4.1

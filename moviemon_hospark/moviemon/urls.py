@@ -13,3 +13,4 @@ urlpatterns = [
     path('options/load_game', views.Load, name="Load"),
     path('start', views.start, name="Load"),
 ]
+
