@@ -105,14 +105,14 @@ def Moviedex(request):
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
-    return render(request, "pages/Moviedex.html")
+    return views_movie.views_movies(request, "pages/Moviedex.html")
 
 
 def Detail(request):
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
-    return views_moive.views_movies(request, "pages/Moviedex.html")
+    return 
 
 
 def Option(request):
