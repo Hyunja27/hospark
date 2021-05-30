@@ -1,11 +1,11 @@
 from tkinter.constants import NO
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 # from movie_data.movie_total import
 
 # Create your views here.
 
 
-def press_up():
+def press_up(request):
     print("up")
 
 
@@ -39,6 +39,26 @@ def press_Select():
 
 def get_id(request):
     id = request.GET.get('key', None)
+<<<<<<< HEAD
+    if id == "up":
+        press_up(request)
+    elif id == "left":
+        press_left()
+    elif id == "right":
+        press_right()
+    elif id == "down":
+        press_down()
+    elif id == "A":
+        press_A()
+    elif id == "B":
+        press_B()
+    elif id == "Start":
+        press_Start()
+    elif id == "Select":
+        press_Select()
+    return redirect(request.path)
+
+=======
     if id is not None:
         if id == "up":
             press_up
@@ -57,49 +77,60 @@ def get_id(request):
         elif id == "Select":
             press_Select()
     
+>>>>>>> 3c5c58e3f0fa8c7a2fcca4720b8d50907e9a5704
 
 def Titlescreen(request):
-    get_id(request)
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
     return render(request, 'pages/Titlescreen.html')
 
 
-def Wordmap(request):
-    get_id(request)
-    return render(request, 'pages/wordmap.html')
+def Worldmap(request):
+    id = request.GET.get('key', None)
+    print("[", request.path, "]", id)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/Worldmap.html')
 
 
 def Battle(request):
-    get_id(request)
-    return render(request, 'pages/battle/1.html')
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/Battle.html')
 
 
 def Moviedex(request):
-    get_id(request)
-    return render(request, 'pages/moviedex.html')
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/Moviedex.html')
 
 
 def Detail(request):
-    get_id(request)
-    return render(request, 'pages/moviedex/1.html')
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/Moviedex.html')
 
 
 def Option(request):
-    get_id(request)
-    return render(request, 'pages/options.html')
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/Options.html')
 
 
 def Save(request):
-    get_id(request)
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
     return render(request, 'pages/options/save_game.html')
 
 
 def Load(request):
-    get_id(request)
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
     return render(request, 'pages/options/load_game.html')
-
-def start(request):
-    return render(request, 'pages/Titlescreen.html')
-
-# def up(request) :
-    # get_id(request)
-    # print(request.Get())
