@@ -1,9 +1,11 @@
 from django.shortcuts import render
+# from movie_data.movie_total import
 
 # Create your views here.
 
 
 def Titlescreen(request):
+    print(request.GET)
     return render(request, 'pages/Titlescreen.html')
 
 def Wordmap(request):
@@ -26,4 +28,7 @@ def Save(request):
 
 def Load(request):
     return render(request, 'pages/options/load_game.html')
+
+def start(request):
+    return render(request, 'pages/Titlescreen.html')
 

@@ -11,4 +11,5 @@ urlpatterns = [
     path('options', views.Option, name="Option"),
     path('options/save_game', views.Save, name="Save"),
     path('options/load_game', views.Load, name="Load"),
+    path('start', views.start, name="Load"),
 ]

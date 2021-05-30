@@ -1,36 +1,50 @@
 {% load static %}
+
+{% block style%}
+		<style>
+			{% comment %} table{
+				position: fixed;
+    			bottom: 0;
+    			width:100%;
+    			height:100px;
+			} {% endcomment %}
+		</style>
+{% endblock %}
 {% block from %}
     <table>
         {% csrf_token %}
         {{ form.as_p }}
 		<tr>
 			<td></td>
-			<td><button type="submit" class="bottn" id ="up">up</button></td>
+			<td><button type="submit" class="botton" id ="up">up</button></td>
 			<td></td>
 			<td></td>
 			<td></td>
 			<td></td>
 			<td></td>
 			<td>
-			<button type="submit" class="bottn" id ="Start">Start</button>
+			<form action='start' method='POST'>
+			<button type="submit" class="botton" id ="Start">Start</button>
+			<form>
 			</td>
 			<td>
-			<button type="submit" class="bottn" id ="Select">Select</button>
+			<button type="submit" class="botton" id ="Select">Select</button>
 			</td>
+			<a href="/?key=up" >a</a>
 		</tr>
 		<tr>
-			<td><button type="submit" class="bottn" id ="left">left</button></td>
+			<td><button type="submit" class="botton" id ="left">left</button></td>
 			<td></td>
-			<td><button type="submit" class="bottn" id ="right">right</button></td>
+			<td><button type="submit" class="botton" id ="right">right</button></td>
 			<td></td>
-			<td><button type="submit" class="bottn" id ="A">A</button></td>
+			<td><button type="submit" class="botton" id ="A">A</button></td>
 			<td></td>
-			<td><button type="submit" class="bottn" id ="B">B</button></td>
+			<td><button type="submit" class="botton" id ="B">B</button></td>
 			<td></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><button type="submit" class="bottn" id ="down">down</button></td>
+			<td><button type="submit" class="botton" id ="down">down</button></td>
 			<td></td>
 			<td></td>
 			<td></td>

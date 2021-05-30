@@ -4,11 +4,21 @@
 	<head>
 		<meta charset="UFT-8">
 		{% block title%}{% endblock %}
-		{% block style%}{% endblock %}
+		{% block style%}
+		{% endblock %}
+		<style>
+		.container {
+			background-image: url('https://static.displate.com/857x1200/displate/2020-01-09/228c7dcb7fe88ced0105287c34d6b95a_ea47567da117cc543dc747b819cc6f12.jpg');
+			width: 1280px; 
+			height: 720px; 
+		}
+		</style>
 	</head>
 	<body>
 		{% include 'key.html' %}
-		{% block content%}{% endblock %}
+		<div class="container">
+			{% block content%}{% endblock %}
+		</div>
 	</body>
 </html>
 
