@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/spark/Box_main_cursus/11_python_piscine/hospark_forked/rush00_venv"
+VIRTUAL_ENV="/Users/hopark/Desktop/hopark/django/hospark_fork/rush00_venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
