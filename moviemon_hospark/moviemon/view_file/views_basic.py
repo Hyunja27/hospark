@@ -1,6 +1,5 @@
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
-from .movie_data import movie_total
 # Create your views here.
 
 titlemenu = {
