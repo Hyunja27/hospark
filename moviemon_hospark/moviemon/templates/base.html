@@ -6,6 +6,11 @@
     {% block title%}{% endblock %} {% block style%} {% endblock %}
     <script src="{% static 'keyevent.js' %}"></script>
     <style>
+         @font-face {
+        font-family: 'PKMN RBYGSC';
+        font-style: normal;
+        src: url('../static/fonts/PKMN_RBYGSC.ttf') format("truetype");
+        }
       .container {
         background-image: url("https://mario.wiki.gallery/images/1/1f/GBA_Handheld.png?download");
         background-size: 1600px 1000px;
@@ -18,16 +23,8 @@
 
   <body class="container">
     {% include 'key.html' %}
-    <div
-      style="
-        width: 687px;
-        height: 490px;
-        position: absolute;
-        top: 190px;
-        left: 450px;
-      "
-    >
-      {% block content%}{% endblock %}
+    <div style="width: 687px; height: 490px; position: absolute; top:190px; left:450px; background-color: rgb(172, 166, 166);">
+        {% block content%}{% endblock %}
     </div>
   </body>
 </html>
