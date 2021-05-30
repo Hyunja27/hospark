@@ -56,7 +56,7 @@ def get_id(request):
             press_Start()
         elif id == "Select":
             press_Select()
-
+    
 
 def Titlescreen(request):
     get_id(request)
