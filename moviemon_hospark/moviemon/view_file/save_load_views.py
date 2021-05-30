@@ -1,17 +1,28 @@
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
-from .movie_data import movie_total
 # Create your views here.
 
-titlemenu = {
-    'a': 0,
-    'b': 1
+saveloadmenu = {
+    'a': 1,
 }
 
 
 def press_up(request):
-    print("up")
-
+    if saveloadmenu['a'] != 1:
+        saveloadmenu['a'] -= 1
+    if saveloadmenu['a'] == 1:
+        context = {
+            'ch_a': "14px",
+            'ch_b': "0px",
+            'ch_c': "0px"
+        }
+    elif saveloadmenu['a'] == 2:
+        context = {
+            'ch_a': "0px",
+            'ch_b': "14px",
+            'ch_c': "0px"
+        }
+    return render(request, 'pages/Load.html', context)
 
 def press_left(request):
     print("left")
@@ -22,7 +33,22 @@ def press_right(request):
 
 
 def press_down(request):
-    print("down")
+    if saveloadmenu['a'] != 3:
+        saveloadmenu['a'] += 1
+    saveloadmenu['a'] += 1
+    if saveloadmenu['a'] == 2:
+        context = {
+            'ch_a': "14px",
+            'ch_b': "0px",
+            'ch_c': "0px"
+        }
+    elif saveloadmenu['a'] == 3:
+        context = {
+            'ch_a': "0px",
+            'ch_b': "14px",
+            'ch_c': "0px"
+        }
+    return render(request, 'pages/Load.html', context)
 
 
 def press_A(request):
@@ -56,8 +82,10 @@ def press_B(request):
 def press_Start(request):
     print("Start")
 
+
 def press_Select(request):
     print("Select")
+
 
 def get_id(request):
     id = request.GET.get('key', None)
@@ -91,7 +119,8 @@ def Worldmap(request):
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
-    return render(request, 'pages/Worldmap.html', {'num' : 20})
+    return render(request, 'pages/Worldmap.html')
+
 
 def Battle(request):
     id = request.GET.get('key', None)

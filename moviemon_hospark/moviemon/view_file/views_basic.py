@@ -1,6 +1,5 @@
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
-from .movie_data import movie_total
 # Create your views here.
 
 titlemenu = {
@@ -56,8 +55,10 @@ def press_B(request):
 def press_Start(request):
     print("Start")
 
+
 def press_Select(request):
     print("Select")
+
 
 def get_id(request):
     id = request.GET.get('key', None)
@@ -91,7 +92,8 @@ def Worldmap(request):
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
-    return render(request, 'pages/Worldmap.html', {'num' : 20})
+    return render(request, 'pages/Worldmap.html')
+
 
 def Battle(request):
     id = request.GET.get('key', None)
