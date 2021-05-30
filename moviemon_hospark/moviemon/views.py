@@ -97,12 +97,9 @@ def Load(request):
     get_id(request)
     return render(request, 'pages/options/load_game.html')
 
-<<<<<<< HEAD
 def start(request):
     return render(request, 'pages/Titlescreen.html')
 
-=======
 # def up(request) :
     # get_id(request)
     # print(request.Get())
->>>>>>> 7faa8416bc2f6f6ecf70d39e0f9389e31d2193fa
