@@ -68,8 +68,12 @@ def cleaning_db():
     for el in movie_db:
         new_data = {}
         new_data["Title"] = el["Title"]
-        new_data["imdbRating"] = el["imdbRating"]
         new_data["Poster"] = el["Poster"]
+        new_data["Director"] = el["Director"]
+        new_data["Year"] = el["Year"]
+        new_data["imdbRating"] = el["imdbRating"]
+        new_data["Plot"] = el["Plot"]
+        new_data["Actors"] = el["Actors"]
         clean_db[el['imdbID']] = new_data
     return (clean_db)
 
