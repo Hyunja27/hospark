@@ -27,8 +27,9 @@ def save_data(data):
 class G_Data():
     px: int = basic_data.PLAYER_INIT_POSITION[0]
     py: int = basic_data.PLAYER_INIT_POSITION[1]
-    captured_list: List[str] = []
-    moviemon = {}
+    captured_list = []
+    left_moviemon = []
+    total_moviemon = []
     movieballCount: 15
 
     def dump(self):
@@ -36,7 +37,9 @@ class G_Data():
             "px": self.px,
             "py": self.py,
             "captured_list": self.captured_list,
-            "moviemon": self.moviemon,
+            "left_moviemon": basic_data.IN_GAME_MON_LIST,
+            "total_moviemon":basic_data.TOTAL_MON_LIST,
+            "moviemon": self.moviemon
         }
 
     def load(data):
@@ -45,6 +48,8 @@ class G_Data():
         result.py = data["py"]
         result.captured_list = data["captured_list"]
         result.moviemon = data["moviemon"]
+        result.left_moviemon = data["left_moviemon"]
+        result.total_moviemon = data["total_moviemon"]
         return result
 
     def get_random_movie(self):
@@ -54,31 +59,15 @@ class G_Data():
 
     # def get_strength(self):
     #     rest = len(self.moviemon) - len(self.captured_list)
-    #     pick = random.randrange(0,rest)
+    #     pick = random.randrange(0,rest) 
     #     return self.moviemon[pick]
 
 
     def load_default_settings():
         return G_Data.load(load_data())
+
         # result = G_Data()
         # URL = "http://www.omdbapi.com/"
-
-        # f = open("test.json", 'r')
-        # data = json.load(f)
-        # f.close()
-
-        # for key, value in data.items():
-        #     result.captured_list.append(key)
-        #     result.moviemon[key] = {
-        #         "title": value["Title"],
-        #         "year": value["Year"],
-        #         "director": value["Director"],
-        #         "poster": value["Poster"],
-        #         "rating": float(value["imdbRating"]),
-        #         "plot": value["Plot"],
-        #         "actors": value["Actors"],
-        #     }
-
         # for id in basic_data.IMDB_LIST:
         #     params = {
         #         "apikey": basic_data.OMDB_API_KEY,
@@ -98,3 +87,23 @@ class G_Data():
         #     except Exception as e:
         #         assert e
         # return result
+
+
+
+
+
+
+        # f = open("test.json", 'r')
+        # data = json.load(f)
+        # f.close()
+        # for key, value in data.items():
+        #     result.captured_list.append(key)
+        #     result.moviemon[key] = {
+        #         "title": value["Title"],
+        #         "year": value["Year"],
+        #         "director": value["Director"],
+        #         "poster": value["Poster"],
+        #         "rating": float(value["imdbRating"]),
+        #         "plot": value["Plot"],
+        #         "actors": value["Actors"],
+        #     }

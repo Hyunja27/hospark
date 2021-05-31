@@ -23,19 +23,10 @@
     {% endblock %} 
     {% block title %}<title>Worldmap</title>{% endblock title%} 
     {% block content %}
-    {% comment %} x/y를 알고 있을 때, 여기에 렌더링 하는 방법? {% endcomment %}
-
-    {% comment %} for x 0..7
-        for y in 0..5
-            if x == currentX && y == currentY
-                <td><div> {% endcomment %}
    <table>
     {% for j in ten %}
         <tr>
         {% for i in ten %}
-        {% comment %} <td>
-            i:{{ i }}x:{{ cur_x }}
-        </td> {% endcomment %}
             {% if cur_x == i and cur_y == j %}
                 <td style="width: 10px;height: 10px; background-color: black"></td>	
             {% else %}
@@ -45,68 +36,5 @@
         </tr>
     {% endfor %}
     </table>
-{% comment %} 
-  <table>
-    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    </table>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> {% endcomment %}
     <p align="right"><font size="6"><img src="{% static 'ball.jpg' %}"/> : 20 </font></p>
-<<<<<<< HEAD
     {% endblock content%}
-=======
-	{% extends 'base.html' %}  {% load static %} {% block style%}
-	<style>
-	table {
-		position : absolute;
-		top:0px;
-		left:0px;
-		border: #707070 1px;
-		width: 500px;
-		height: 490px;
-	}
-	tr, td {
-		border: #707070 1px  dashed;
-		width: 10px;
-		height: 10px;
-	}
-	img {
-		 position=absolute;
-		 top:100px;
-		 flaot : right;
-		 {% comment %} left:60px; {% endcomment %}
-		 {% comment %} width:40px; {% endcomment %}
-		 height: 40px;
-	}
-	</style>
-	{% endblock %} {% block title %}<title>Worldmap</title>{% endblock title%} 
-	{% block content %}
-	<table>
-	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-	</table>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<p align="right"><font size="6"><img src="{% static 'balloff.jpg' %}"/> : 20 </font></p>
-	{% endblock content%}
->>>>>>> c78c77a933d3793cd2746a5715f7674cb3791be6
-=======
-    {% endblock content%}
->>>>>>> 371ffd2d29d173cb0c8b7b37bc39d93412fc02a8

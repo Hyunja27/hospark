@@ -1,6 +1,8 @@
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
 from views_movie import views_movies
+from ..middlewares.loadSessionMiddleware import loadSession_middleware
+from ..utils.game_data import G_Data, load_data, save_data
 # Create your views here.
 
 titlemenu = {
