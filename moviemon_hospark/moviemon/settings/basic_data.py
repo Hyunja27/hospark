@@ -5,6 +5,12 @@ OMDB_API_KEY = '2798667a' if environ.get('OMDB_API_KEY') is None else environ.ge
 GRID_SIZE = (10, 10)
 PLAYER_INIT_POSITION = (0, 0)
 
+TOTAL_MON_LIST = []
+
+IN_GAME_MON_LIST = []
+
+CAPTURE_MON_LIST = []
+
 IMDB_LIST = [
 "tt0468492",
 "tt5034838",

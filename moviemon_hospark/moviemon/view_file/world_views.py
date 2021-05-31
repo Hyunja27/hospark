@@ -1,7 +1,9 @@
-from ..utils.game_data import G_Data, load_data, save_data
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
 from ..middlewares.loadSessionMiddleware import loadSession_middleware
+from ..utils.game_data import G_Data, load_data, save_data
+from ..settings import basic_data
+import random
 # Create your views here.
 
 player_pos = {
@@ -14,10 +16,23 @@ situation = {
     'getball': 0,
 }
 
-# ten = {}
 
 X_MAX = 9
 Y_MAX = 9
+
+def toss_coin():
+    return random.random(1)
+
+def encounter_something(request):
+    g = G_Data.load(load_data())
+    if toss_coin:
+        if toss_coin:
+            if toss_coin:
+                return render(request, 'pages/Obtain.html')
+                
+                # 볼 얻기 이벤트 만들차레!!
+
+    save_data(g.dump())
 
 
 def press_up(request):
@@ -25,8 +40,6 @@ def press_up(request):
     if (g.py > 0):
         g.py -= 1
     print("up ", g.py)
-
-    print(g.moviemon)
     save_data(g.dump())
     return redirect(request.path)
 

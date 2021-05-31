@@ -1,7 +1,9 @@
-from ..utils.game_data import G_Data, save_data
+import random 
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
-
+from ..middlewares.loadSessionMiddleware import loadSession_middleware
+from ..utils.game_data import G_Data, load_data, save_data
+from ..settings import basic_data
 # Create your views here.
 
 titlemenu = {
@@ -19,10 +21,20 @@ def press_A(request):
         }
         print(context)
         return render(request, 'pages/Titlescreen.html', context)
+    print("\n\n\n\n\n\n  == gettering Many Movies...... Wait Some Seconds..  ==\n\n\n\n\n\n")
     print("A")
     save_data(G_Data.load_default_settings().dump())
+    g = G_Data.load(load_data())
+    for index, (key, elem) in enumerate(g.moviemon.items()):
+        print("[",index,"]", key, elem)
+        basic_data.TOTAL_MON_LIST.append({key : elem})
+    tmp = []
+    while len(basic_data.IN_GAME_MON_LIST) < 15:
+        pick = random.randint(0, len(basic_data.TOTAL_MON_LIST))
+        if pick not in tmp:
+            tmp.append(pick)
+            basic_data.IN_GAME_MON_LIST.append(basic_data.TOTAL_MON_LIST[pick])
     return redirect('Worldmap_page')
-
 
 def press_B(request):
     if titlemenu['b'] == 0:
@@ -34,7 +46,7 @@ def press_B(request):
         }
         print(context)
         return render(request, 'pages/Titlescreen.html', context)
-    print("B")
+
     return redirect('Load') 
 
 
