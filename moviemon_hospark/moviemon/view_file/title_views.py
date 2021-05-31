@@ -1,10 +1,12 @@
+from ..utils.game_data import G_Data, save_data
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
+
 # Create your views here.
 
 titlemenu = {
     'a': 0,
-    'b': 1
+    'b': 0
 }
 
 def press_A(request):
@@ -18,7 +20,8 @@ def press_A(request):
         print(context)
         return render(request, 'pages/Titlescreen.html', context)
     print("A")
-    return Titlescreen(request)
+    save_data(G_Data.load_default_settings().dump())
+    return redirect('Worldmap_page')
 
 
 def press_B(request):
@@ -32,7 +35,7 @@ def press_B(request):
         print(context)
         return render(request, 'pages/Titlescreen.html', context)
     print("B")
-    return render(request, 'pages/Load.html')
+    return redirect('Load') 
 
 
 def get_id(request):

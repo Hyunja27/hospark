@@ -1,27 +1,38 @@
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
+from ..middlewares.loadSessionMiddleware import loadSession_middleware
+from ..utils.game_data import G_Data, load_data, save_data
+
 # Create your views here.
 
 saveloadmenu = {
     'a': 1,
 }
 
-def press_up(request):
-    if saveloadmenu['a'] != 1:
-        saveloadmenu['a'] -= 1
-    if saveloadmenu['a'] == 1:
-        context = {
-            'ch_a': "14px",
-            'ch_b': "0px",
-            'ch_c': "0px"
-        }
-    else:
-        context = {
+saveslot = {
+    'slot1': 0,
+    'slot2': 2,
+    'slot3': 0,
+}
+
+choose = {
             'ch_a': "0px",
             'ch_b': "14px",
             'ch_c': "0px"
         }
-    return render(request, 'pages/Load.html', context)
+
+def press_up(request):
+    if saveloadmenu['a'] != 1:
+        saveloadmenu['a'] -= 1
+    if saveloadmenu['a'] == 1:
+        choose['ch_a'] = "14px"
+        choose['ch_b'] = "0px"
+        choose['ch_c'] = "0px"
+    else:
+        choose['ch_a'] = "0px"
+        choose['ch_b'] = "14px"
+        choose['ch_c'] = "0px"
+    return redirect(request.path)
 
 def press_left(request):
     print("left")
@@ -35,29 +46,25 @@ def press_down(request):
     if saveloadmenu['a'] != 3:
         saveloadmenu['a'] += 1
     if saveloadmenu['a'] == 2:
-        context = {
-            'ch_a': "0px",
-            'ch_b': "14px",
-            'ch_c': "0px"
-        }
+        choose['ch_a'] = "0px"
+        choose['ch_b'] = "14px"
+        choose['ch_c'] = "0px"
     else:
-        context = {
-            'ch_a': "0px",
-            'ch_b': "0px",
-            'ch_c': "14px"
-        }
-    return render(request, 'pages/Load.html', context)
+        choose['ch_a'] = "0px"
+        choose['ch_b'] = "0px"
+        choose['ch_c'] = "14px"
+    return redirect(request.path)
 
 
 def press_A(request):
-        
-        return redirect('Titlescreen_page')
-    # return Titlescreen(request)
+    g = G_Data.load(load_data())
+    save_data(g.dump())
+    return redirect('Option')
 
 
 def press_B(request):
-        return redirect('Titlescreen_page')
-        # return render(request, 'pages/Titlescreen.html', context)
+        # return render(request.path)
+    return redirect('Option')
 
 def press_Start(request):
     print("Start")
@@ -126,7 +133,15 @@ def Save(request):
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
-    return render(request, 'pages/Save.html')
+    context = {
+        'ch_a': choose['ch_a'],
+        'ch_b': choose['ch_b'],
+        'ch_c': choose['ch_c'],
+        'slot1' : saveslot['slot1'],
+        'slot2' : saveslot['slot2'],
+        'slot3' : saveslot['slot3'],
+        }
+    return render(request, 'pages/Save.html', context)
 
 
 def Load(request):

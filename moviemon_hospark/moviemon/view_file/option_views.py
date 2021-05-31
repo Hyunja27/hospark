@@ -1,82 +1,52 @@
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
+from . import title_views, save_load_views, world_views
 # Create your views here.
 
-saveloadmenu = {
-    'a': 1,
+titlemenu = {
+    'a': 0,
+    'b': 0
 }
 
-def press_up(request):
-    if saveloadmenu['a'] != 1:
-        saveloadmenu['a'] -= 1
-    if saveloadmenu['a'] == 1:
+def press_A(request):
+    if titlemenu['a'] == 0:
+        titlemenu['b'] = 0
+        titlemenu['a'] = 1
         context = {
             'ch_a': "14px",
-            'ch_b': "0px",
-            'ch_c': "0px"
+            'ch_b': "0px"
         }
-    else:
-        context = {
-            'ch_a': "0px",
-            'ch_b': "14px",
-            'ch_c': "0px"
-        }
-    return render(request, 'pages/Load.html', context)
-
-def press_left(request):
-    print("left")
-
-
-def press_right(request):
-    print("right")
-
-
-def press_down(request):
-    if saveloadmenu['a'] != 3:
-        saveloadmenu['a'] += 1
-    if saveloadmenu['a'] == 2:
-        context = {
-            'ch_a': "0px",
-            'ch_b': "14px",
-            'ch_c': "0px"
-        }
-    else:
-        context = {
-            'ch_a': "0px",
-            'ch_b': "0px",
-            'ch_c': "14px"
-        }
-    return render(request, 'pages/Load.html', context)
-
-
-def press_A(request):
-        
-        return redirect('Titlescreen_page')
-    # return Titlescreen(request)
+        print(context)
+        return render(request, 'pages/Options.html', context)
+    print("A")
+    return redirect('Save')
 
 
 def press_B(request):
-        return redirect('Titlescreen_page')
-        # return render(request, 'pages/Titlescreen.html', context)
+    if titlemenu['b'] == 0:
+        titlemenu['a'] = 0
+        titlemenu['b'] = 1
+        context = {
+            'ch_a': "0px",
+            'ch_b': "14px"
+        }
+        print(context)
+        return render(request, 'pages/Options.html', context)
+    print("B")
+    return redirect('Titlescreen_page') 
 
 def press_Start(request):
-    print("Start")
-
-
-def press_Select(request):
-    print("Select")
+    return redirect('Worldmap_page') 
 
 
 def get_id(request):
     id = request.GET.get('key', None)
-    if id == "up":
-        return press_up(request)
-    elif id == "down":
-        return press_down(request)
-    elif id == "A":
+    if id == "A":
         return press_A(request)
     elif id == "B":
         return press_B(request)
+    elif id == "Start":
+        return press_Start(request)
     return redirect(request.path)
 
 
@@ -126,11 +96,11 @@ def Save(request):
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
-    return render(request, 'pages/Save.html')
+    return render(request, 'pages/options/save_game.html')
 
 
 def Load(request):
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
-    return render(request, 'pages/Load.html')
+    return render(request, 'pages/options/load_game.html')
