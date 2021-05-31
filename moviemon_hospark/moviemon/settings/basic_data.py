@@ -5,6 +5,8 @@ OMDB_API_KEY = '2798667a' if environ.get('OMDB_API_KEY') is None else environ.ge
 GRID_SIZE = (10, 10)
 PLAYER_INIT_POSITION = (0, 0)
 
+START_BALL_AMOUNT = 15
+
 TOTAL_MON_LIST = []
 
 IN_GAME_MON_LIST = []
