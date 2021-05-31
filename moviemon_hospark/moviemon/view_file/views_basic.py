@@ -1,5 +1,6 @@
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
+from views_movie import views_movies
 # Create your views here.
 
 titlemenu = {
@@ -106,7 +107,7 @@ def Moviedex(request):
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
-    return render(request, 'pages/Moviedex.html')
+    return views_movies(request, 'pages/Moviedex.html')
 
 
 def Detail(request):
