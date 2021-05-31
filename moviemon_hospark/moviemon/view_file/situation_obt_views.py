@@ -64,7 +64,6 @@ def press_down(request):
 def press_A(request):
     g = G_Data.load(load_data())
     if situationmanu['a'] == 0:
-        situationmanu['b'] = 0
         situationmanu['a'] = 1
         context = {
             'ch_a': "17px",
@@ -72,7 +71,6 @@ def press_A(request):
         }
         return render(request, 'pages/Obtain.html', context)
     print("A")
-    situationmanu['a'] = 0
     return redirect('Worldmap_page')
 
 
