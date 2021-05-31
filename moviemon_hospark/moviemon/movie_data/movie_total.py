@@ -72,3 +72,7 @@ def cleaning_db():
         new_data["Poster"] = el["Poster"]
         clean_db[el['imdbID']] = new_data
     return (clean_db)
+
+
+
+
