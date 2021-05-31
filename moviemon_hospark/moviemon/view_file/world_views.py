@@ -1,7 +1,10 @@
-from ..utils.game_data import G_Data, load_data, save_data
 from tkinter.constants import NO
+from django.http import request
 from django.shortcuts import render, redirect
 from ..middlewares.loadSessionMiddleware import loadSession_middleware
+from ..utils.game_data import G_Data, load_data, save_data
+from ..settings import basic_data
+import random
 # Create your views here.
 
 player_pos = {
@@ -14,61 +17,97 @@ situation = {
     'getball': 0,
 }
 
-# ten = {}
 
 X_MAX = 9
 Y_MAX = 9
 
+def toss_coin():
+    return random.randint(0,1)
+
+def encounter_something(request):
+    situation['getball'] = 1
+    g = G_Data.load(load_data())
+    if toss_coin():
+        if toss_coin():
+            if toss_coin():
+                if toss_coin(): ball_amount = 2
+                else: ball_amount = 1
+                g.movieballCount += ball_amount
+                print("\n\n====Ball_obt :", ball_amount, "====\n\n")
+                context = {'old_ball': g.movieballCount, 'obt_ball' : ball_amount}
+                save_data(g.dump())
+                print("\n\n====ToTal_ball :", g.movieballCount, "====\n\n")
+                return render(request, 'pages/Obtain.html', context)
+            # mon_index = random.randint(0, len(g.left_moviemon))
+
+    return redirect(request.path)
+
 
 def press_up(request):
-    g = G_Data.load(load_data())
-    if (g.py > 0):
-        g.py -= 1
-    print("up ", g.py)
-
-    print(g.moviemon)
-    save_data(g.dump())
-    return redirect(request.path)
+    if (situation['battle'] != 1 and situation['battle'] != 1):
+        g = G_Data.load(load_data())
+        if (g.py > 0):
+            g.py -= 1
+        print("up ", g.py)
+        print("mon: ",len(g.left_moviemon),"ball: ",g.movieballCount)
+        if len(g.left_moviemon) > 0:
+            save_data(g.dump())
+            return encounter_something(request)
+        save_data(g.dump())
+        return redirect(request.path)
 
 
 def press_left(request):
-    g = G_Data.load(load_data())
-    if (g.px > 0):
-        g.px -= 1
-    print("left ", g.px)
-    save_data(g.dump())
-    return redirect(request.path)
+    if (situation['battle'] != 1 and situation['battle'] != 1):
+        g = G_Data.load(load_data())
+        if (g.px > 0):
+            g.px -= 1
+        print("left ", g.px)
+        print("mon: ",len(g.left_moviemon))
+        if len(g.left_moviemon) > 0:
+            save_data(g.dump())
+            return encounter_something(request)
+        save_data(g.dump())
+        return redirect(request.path)
 
 
 def press_right(request):
-    g = G_Data.load(load_data())
-    if (g.px < X_MAX):
-        g.px += 1
-    print("right ", g.px)
-    save_data(g.dump())
-    return redirect(request.path)
+    if (situation['battle'] != 1 and situation['battle'] != 1):
+        g = G_Data.load(load_data())
+        if (g.px < X_MAX):
+            g.px += 1
+        print("right ", g.px)
+        print("mon: ",len(g.left_moviemon))
+        if len(g.left_moviemon) > 0:
+            save_data(g.dump())
+            return encounter_something(request)
+        save_data(g.dump())
+        return redirect(request.path)
 
 
 def press_down(request):
-    g = G_Data.load(load_data())
-    if (g.py < Y_MAX):
-        g.py += 1
-    print("down ", g.py)
-    save_data(g.dump())
-    return redirect(request.path)
+    if (situation['battle'] != 1 and situation['battle'] != 1):
+        g = G_Data.load(load_data())
+        if (g.py < Y_MAX):
+            g.py += 1
+        print("down ", g.py)
+        print("mon: ",len(g.left_moviemon))
+        if len(g.left_moviemon) > 0:
+            save_data(g.dump())
+            return encounter_something(request)
+        save_data(g.dump())
+        return redirect(request.path)
 
 
 def press_A(request):
     if (situation['battle'] == 1 or situation['battle'] == 1):
-        player_pos['y'] += 1
-    print("A")
+        print("A")
     return redirect(request.path)
 
 
 def press_B(request):
     if (situation['battle'] == 1 or situation['battle'] == 1):
-        player_pos['y'] += 1
-    print("B")
+        print("B")
     return redirect(request.path)
 
 
@@ -116,7 +155,7 @@ def Worldmap(request):
     if id is not None:
         return get_id(request)
     context = {'cur_x': g.px,
-               'cur_y': g.py,  "ten": [i for i in range(10)]}
+               'cur_y': g.py,  "ten": [i for i in range(10)], 'ballnum': g.movieballCount}
     return render(request, 'pages/Worldmap.html', context)
 
 
