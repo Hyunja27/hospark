@@ -12,19 +12,14 @@ player_pos = {
     'y': 5
 }
 
-situation = {
-    'battle': 0,
-    'getball': 0,
+battlemenu = {
+    'a': 0,
+    'b': 0,
 }
 
 
 X_MAX = 9
 Y_MAX = 9
-
-def get_one_mon():
-    g = G_Data.load(load_data())
-    pick = random.randint(0, len(g.left_moviemon) - 1)
-    return pick
 
 def toss_coin():
     return random.randint(0,1)
@@ -38,83 +33,56 @@ def encounter_something(request):
                 if toss_coin(): ball_amount = 2
                 else: ball_amount = 1
                 g.movieballCount += ball_amount
+                # print("\n\n====Ball_obt :", ball_amount, "====\n\n")
+                # context = {'old_ball': g.movieballCount, 'obt_ball' : ball_amount}
                 save_data(g.dump())
                 return redirect('situation_obt')
-        save_data(g.dump())
-        pick = get_one_mon()
-        id = list(g.left_moviemon[pick])[0]
-        print(id)
-        return redirect('battle/' + id)
+                # print("\n\n====ToTal_ball :", g.movieballCount, "====\n\n")
+                # return render(request, 'pages/Obtain.html', context)
+            # mon_index = random.randint(0, len(g.left_moviemon))
+
     return redirect(request.path)
 
 
 def press_up(request):
-    if (situation['battle'] != 1 and situation['battle'] != 1):
-        g = G_Data.load(load_data())
-        if (g.py > 0):
-            g.py -= 1
-        print("up ", g.py)
-        print("mon: ",len(g.left_moviemon),"ball: ",g.movieballCount)
-        if len(g.left_moviemon) > 0:
-            save_data(g.dump())
-            return encounter_something(request)
-        save_data(g.dump())
-        return redirect(request.path)
+    return redirect(request.path)
 
 
 def press_left(request):
-    if (situation['battle'] != 1 and situation['battle'] != 1):
-        g = G_Data.load(load_data())
-        if (g.px > 0):
-            g.px -= 1
-        print("left ", g.px)
-        print("mon: ",len(g.left_moviemon))
-        if len(g.left_moviemon) > 0:
-            save_data(g.dump())
-            return encounter_something(request)
-        save_data(g.dump())
-        return redirect(request.path)
+    return redirect(request.path)
 
 
 def press_right(request):
-    if (situation['battle'] != 1 and situation['battle'] != 1):
-        g = G_Data.load(load_data())
-        if (g.px < X_MAX):
-            g.px += 1
-        print("right ", g.px)
-        print("mon: ",len(g.left_moviemon))
-        if len(g.left_moviemon) > 0:
-            save_data(g.dump())
-            return encounter_something(request)
-        save_data(g.dump())
-        return redirect(request.path)
+    return redirect(request.path)
 
 
 def press_down(request):
-    if (situation['battle'] != 1 and situation['battle'] != 1):
-        g = G_Data.load(load_data())
-        if (g.py < Y_MAX):
-            g.py += 1
-        print("down ", g.py)
-        print("mon: ",len(g.left_moviemon))
-        if len(g.left_moviemon) > 0:
-            save_data(g.dump())
-            return encounter_something(request)
-        save_data(g.dump())
-        return redirect(request.path)
-
-
-def press_A(request):
-    if (situation['battle'] == 1 or situation['battle'] == 1):
-        print("A")
     return redirect(request.path)
 
 
-def press_B(request):
-    if (situation['battle'] == 1 or situation['battle'] == 1):
-        print("B")
-    return redirect(request.path)
+def press_A(request, id):
+    g = G_Data.load(load_data())
+    context = {'mon_id': id,
+           'ballnum': g.movieballCount,
+           'ch_a': "8px",
+            'ch_b': "0px"}
+    if battlemenu['a'] == 0:
+        battlemenu['b'] = 0
+        battlemenu['a'] = 1
+        return render(request, 'pages/Battle.html', context)
 
+
+def press_B(request, id):
+    g = G_Data.load(load_data())
+    context = {'mon_id': id,
+           'ballnum': g.movieballCount,
+           'ch_a': "0px",
+            'ch_b': "8px"}
+    if battlemenu['b'] == 0:
+        battlemenu['a'] = 0
+        battlemenu['b'] = 1
+        return render(request, 'pages/Battle.html', context)
+    return redirect('Worldmap_page')
 
 def press_Start(request):
     print("Start")
@@ -126,23 +94,23 @@ def press_Select(request):
     return redirect('Moviedex')
 
 
-def get_id(request):
-    id = request.GET.get('key', None)
-    if id == "up":
+def get_id(request, id):
+    k = request.GET.get('key', None)
+    if k == "up":
         return press_up(request)
-    elif id == "left":
+    elif k == "left":
         return press_left(request)
-    elif id == "right":
+    elif k == "right":
         return press_right(request)
-    elif id == "down":
+    elif k == "down":
         return press_down(request)
-    elif id == "A":
-        return press_A(request)
-    elif id == "B":
-        return press_B(request)
-    elif id == "Start":
+    elif k == "A":
+        return press_A(request, id)
+    elif k == "B":
+        return press_B(request, id)
+    elif k == "Start":
         return press_Start(request)
-    elif id == "Select":
+    elif k == "Select":
         return press_Select(request)
     return redirect(request.path)
 
@@ -150,7 +118,7 @@ def get_id(request):
 def Titlescreen(request):
     id = request.GET.get('key', None)
     if id is not None:
-        return get_id(request)
+        return get_id(request, id)
     return render(request, 'pages/Titlescreen.html')
 
 @loadSession_middleware
@@ -164,11 +132,15 @@ def Worldmap(request):
     return render(request, 'pages/Worldmap.html', context)
 
 
-def Battle(request):
-    id = request.GET.get('key', None)
-    if id is not None:
-        return get_id(request)
-    return render(request, 'pages/Battle.html')
+def Battle(request, id):
+    print("\n\n[[", id, "]]\n\n")
+    key = request.GET.get('key', None)
+    if key is not None:
+        return get_id(request, id)
+    g = G_Data.load(load_data())
+    context = {'mon_id': id,
+               'ballnum': g.movieballCount}
+    return render(request, 'pages/Battle.html', context)
 
 
 def Moviedex(request):
