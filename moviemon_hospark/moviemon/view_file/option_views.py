@@ -16,7 +16,7 @@ def press_A(request):
             'ch_b': "0px"
         }
         print(context)
-        return render(request, 'pages/Titlescreen.html', context)
+        return render(request, 'pages/Option.html', context)
     print("A")
     return redirect('Worldmap_page')
 
@@ -30,9 +30,12 @@ def press_B(request):
             'ch_b': "14px"
         }
         print(context)
-        return render(request, 'pages/Titlescreen.html', context)
+        return render(request, 'pages/Option.html', context)
     print("B")
-    return redirect('Load') 
+    return redirect('Titlescreen_page') 
+
+def press_Start(request):
+    print("Start")
 
 
 def get_id(request):
@@ -41,6 +44,8 @@ def get_id(request):
         return press_A(request)
     elif id == "B":
         return press_B(request)
+    elif id == "Start":
+        return press_Start(request)
     return redirect(request.path)
 
 
