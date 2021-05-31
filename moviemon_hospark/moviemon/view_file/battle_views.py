@@ -17,9 +17,29 @@ battlemenu = {
     'b': 0,
 }
 
+mon_info = {
+    'rating': 0,
+    'title': 0,
+    'year': 0,
+    'directer': 0,
+    'plot': 0
+}
+
 
 X_MAX = 9
 Y_MAX = 9
+
+def get_mon_info(id):
+    g = G_Data.load(load_data())
+    dict_mon = {}
+    for i in g.left_moviemon:
+        for key, values in i.items() :
+            dict_mon[key] = values
+    mon_info['rating'] = dict_mon[id]['rating']
+    mon_info['title'] = dict_mon[id]['title']
+    mon_info['year'] = dict_mon[id]['year']
+    mon_info['director'] = dict_mon[id]['director']
+    mon_info['plot'] = dict_mon[id]['plot']
 
 def toss_coin():
     return random.randint(0,1)
@@ -70,10 +90,12 @@ def press_A(request, id):
         battlemenu['b'] = 0
         battlemenu['a'] = 1
         return render(request, 'pages/Battle.html', context)
+    return render(request, 'pages/Battle.html', context)
 
 
 def press_B(request, id):
     g = G_Data.load(load_data())
+    get_mon_info(id)
     context = {'mon_id': id,
            'ballnum': g.movieballCount,
            'ch_a': "0px",
