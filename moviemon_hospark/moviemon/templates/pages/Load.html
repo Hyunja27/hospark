@@ -1,44 +1,44 @@
 {% extends 'base.html' %} {% load static %}
 {% block title %}<title>Load</title>{% endblock title%}
 {% block content %}
-<table style="width: 687px; height: 490px;">
+
+<table style="margin:auto; border-collapse:collapse;">
     <tr>
-    <h3 style="padding: 3px; margin: 0;">Load MovieMon!</h3>
+    <h3 style="padding: 30px; margin: 0;">Load MovieMon!</h3>
     </tr>
     <tr>
-        <td style="padding: 0; border-bottom: {{ch_a}} solid rgb(53, 49, 49);">
-            <h1 style="margin: 0; text-align: center;">=A slot= <br>  Free !</h1>
-        </td>
-        <td style="width: 70px; border-bottom: 1px;">
-        </td>
+    <tr>
+        <td class=load_slot style="background-color: 0;"><h2>[slot A]</h2></td>
+        <td class=load_slot style="background-color: 0;"><h2>[slot B]</h2></td>
+        <td class=load_slot style="background-color: 0;;"><h2>[slot C]</h2></td>
     </tr>
     <tr>
-        <td style="padding: 0; border-bottom: {{ch_b}} solid rgb(53, 49, 49);">
-            <h1 style="margin: 0; text-align: center;">=B slot= <br>  Free !</h1>
-        </td>
-        <td style="width: 70px; border-bottom: 1px;">
-        </td>
+        <td class=load_name style="background-color:{{ A }};"><h2>
+            {% if load_A == "x" %}
+                Free !
+            {% else %}
+                <h3>[Save]<br><br>catch : {{load_A}}/10</h3>
+            {% endif%}
+        </h2></td>
+        <td class=load_name style="background-color:{{ B }};"><h2>
+            {% if load_B == "x" %}
+                Free !
+            {% else %}
+                <h3>[Save]<br><br>catch : {{load_B}}/10</h3>
+            {% endif%}
+        </h2></td>
+        <td class=load_name style="background-color:{{ C }};"><h2>
+            {% if load_C == "x" %}
+                Free !
+            {% else %}
+                <h3>[Save]<br><br>catch : {{load_C}}/10</h3>
+            {% endif%}
+        </h2></td>
     </tr>
     <tr>
-        <td style="border-bottom: {{ch_c}} solid rgb(53, 49, 49);">
-            <h1 style="margin: 0; text-align: center; ">=C slot= <br> Free !"</h1>
-        </td>
-        <td style="border-bottom: 1px;">
-        </td>
+        <td class><h4>[A]&nbsp&nbsp:&nbsp&nbspLoad&nbsp/&nbspStart<br>[B]&nbsp&nbsp:&nbsp&nbspCencle</h4></td>
     </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td style="padding: 0; margin: 0;"></td>
-    </tr>
+
 </table>
-
-{% comment %} {% if loaded == 0%}
-        <h3 style="padding: 3px; margin: 0;">A_Load B_Cancel</h3>
-{% else %}
-    <h3 style="padding: 100px; margin: 0;">A_Start Game B_Cancel</h3>
-{% endif %} {% endcomment %}
-
 {% endblock content%}
+{{ch_b}}

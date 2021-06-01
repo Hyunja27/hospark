@@ -25,7 +25,6 @@ def press_A(request):
     print("A")
     save_data(G_Data.load_default_settings().dump())
     g = G_Data.load(load_data())
-    print(g.moviemon)
     for index, (key, elem) in enumerate(g.moviemon.items()):
         basic_data.TOTAL_MON_LIST.append({key : elem})
     print(basic_data.TOTAL_MON_LIST)
