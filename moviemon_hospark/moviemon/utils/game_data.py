@@ -67,7 +67,7 @@ class G_Data():
         for i in self.total_moviemon:
             for key, values in i.items() :
                 temp[key] = values
-        return temp
+        return temp[id]
 
     def get_strength(self):
         return len(self.captured_list)

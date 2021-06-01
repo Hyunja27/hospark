@@ -26,7 +26,7 @@ def press_A(request):
     g = G_Data.load(load_data())
     for index, (key, elem) in enumerate(g.moviemon.items()):
         basic_data.TOTAL_MON_LIST.append({key : elem})
-        rr = key
+        # rr = key
     print(basic_data.TOTAL_MON_LIST)
     tmp = []
     while len(basic_data.IN_GAME_MON_LIST) < 15:
@@ -39,9 +39,9 @@ def press_A(request):
     g.captured_list = []
     save_data(g.dump())
 
-    print("\n\n\n[1[", g.get_random_movie(),"]]")
-    print("\n[2[", g.get_strength(), "]]\n")
-    print("\n[3[ key: ", rr, g.get_movie(tmp),"]]\n\n\n")
+    # print("\n\n\n[1[", g.get_random_movie(),"]]")
+    # print("\n[2[", g.get_strength(), "]]\n")
+    # print("\n[3[ key: ", rr, g.get_movie(rr),"]]\n\n\n")
 
     return redirect('Worldmap_page')
 
