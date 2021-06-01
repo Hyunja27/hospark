@@ -41,10 +41,10 @@ def encounter_something(request):
                 save_data(g.dump())
                 return redirect('situation_obt')
         save_data(g.dump())
-        pick = get_one_mon()
-        id = list(g.left_moviemon[pick])[0]
-        print(id)
-        return redirect('battle/' + id)
+        # pick = get_one_mon()
+        # id = list(g.left_moviemon[pick])[0]
+        return redirect('situation_enc')
+        # return redirect('battle/' + id)
     return redirect(request.path)
 
 

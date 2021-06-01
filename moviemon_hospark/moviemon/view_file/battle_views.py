@@ -48,7 +48,8 @@ def get_mon_info(id):
 
 def catch_or_not():
     g = G_Data.load(load_data())
-    c = 50 -  (mon_info['rating'] * 10) + (g.get_strength() * 5)
+    # c = 50 -  (mon_info['rating'] * 10) + (g.get_strength() * 5)
+    c = 90
     if c < 1: c = 1.0
     if c > 90: c = 90.0
     mon_info['winnig'] = c
@@ -59,7 +60,6 @@ def toss_coin():
     return random.randint(0,1)
 
 def encounter_something(request):
-    situation['getball'] = 1
     g = G_Data.load(load_data())
     if toss_coin():
         if toss_coin():
@@ -96,6 +96,7 @@ def press_down(request):
 
 def press_A(request, id):
     g:G_Data = G_Data.load(load_data())
+    battlemenu['b'] = 0
     context = {'mon_id': id,
            'ballnum': g.movieballCount,
            'ch_a': "8px",
@@ -111,6 +112,7 @@ def press_A(request, id):
     caught = None
     if g.movieballCount > 0:
         g.movieballCount -= 1
+        context['ballnum'] = g.movieballCount
         if catch_or_not() is True:
             for i, dili in enumerate(g.left_moviemon):
                 if dili.get(id):
@@ -120,7 +122,7 @@ def press_A(request, id):
                     break
             save_data(g.dump())
             return redirect('situation_cap')
-    context['missed'] = "Holy shit..."
+    context['missed'] = "Holy shit... Missed!"
     save_data(g.dump())
     if len(g.left_moviemon) == 0 :
         return redirect('End')
@@ -129,6 +131,7 @@ def press_A(request, id):
 
 def press_B(request, id):
     g = G_Data.load(load_data())
+    battlemenu['a'] = 0
     get_mon_info(id)
     context = {'mon_id': id,
            'ballnum': g.movieballCount,
@@ -201,7 +204,7 @@ def Battle(request, id):
     g = G_Data.load(load_data())
     context = {'mon_id': id,
            'ballnum': g.movieballCount,
-           'ch_a': "8px",
+           'ch_a': "0px",
             'ch_b': "0px",
             'poster': mon_info['poster'],
             'winnig': mon_info['winnig'],

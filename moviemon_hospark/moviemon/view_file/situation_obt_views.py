@@ -10,6 +10,7 @@ import random
 situation = {
     'cap': 0,
     'getball': 0,
+    'encount': 0
 }
 
 situationmanu = {
@@ -20,6 +21,10 @@ situationmanu = {
 X_MAX = 9
 Y_MAX = 9
 
+def get_one_mon():
+    g = G_Data.load(load_data())
+    pick = random.randint(0, len(g.left_moviemon) - 1)
+    return pick
 
 def toss_coin():
     return random.randint(0, 1)
@@ -67,7 +72,6 @@ def press_down(request):
 
 def press_A(request):
     g = G_Data.load(load_data())
-    print(situationmanu['a'])
     if situationmanu['a'] == 0:
         situationmanu['a'] = 1
         context = {
@@ -78,8 +82,13 @@ def press_A(request):
         if situation['cap'] == 1:
             situation['cap'] = 0
             return render(request, 'pages/Capture.html', context)
+        elif situation['encount'] == 1:
+            pick = get_one_mon()
+            id = list(g.left_moviemon[pick])[0]
+            return redirect('battle/' + id)
         else:
             return render(request, 'pages/Obtain.html', context)
+            
     print("A")
     situationmanu['a'] = 0
     situation['cap'] = 1
@@ -184,6 +193,19 @@ def Situation_cap(request):
     }
     situationmanu['a'] = 0
     return render(request, 'pages/Capture.html', context)
+
+def Situation_enc(request):
+    situation['encount'] = 1
+    situation['cap'] = 0
+    g = G_Data.load(load_data())
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    context = {
+        'power': "S--uper"
+    }
+    situationmanu['a'] = 0
+    return render(request, 'pages/Encount.html', context)
 
 
 def Option(request):

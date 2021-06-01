@@ -12,8 +12,10 @@ urlpatterns = [
     path('options', option_views.Option, name="Option"),
     path('situation_obt', situation_obt_views.Situation_obt, name="situation_obt"),
     path('situation_cap', situation_obt_views.Situation_cap, name="situation_cap"),
+    path('situation_enc', situation_obt_views.Situation_enc, name="situation_enc"),
     path('options/save_game', save_views.views_Save, name="Save"),
     path('options/load_game', load_views.views_Load, name="Load"),
+    path('options/load_game_done', load_views.views_Load_2, name="Load_2"),
     path('endgame', end_views.views_End, name="End"),
 ]
 
