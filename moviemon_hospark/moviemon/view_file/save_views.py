@@ -61,20 +61,20 @@ class Index():
         for file in sorted(os.listdir(path)):
             if re.match(a_regex, file) is not None:
                 self.saveA = load_data(path+file)
-                break ;
+                break
             else:
                 self.saveA = {}
         for file in sorted(os.listdir(path)):
             if re.match(b_regex, file) is not None:
                 self.saveB = load_data(path+file)
                 print(self.saveB)
-                break ;
+                break
             else:
                 self.saveB = {}
         for file in sorted(os.listdir(path)):
             if re.match(c_regex, file) is not None:
                 self.saveC = load_data(path+file)
-                break ;
+                break
             else:
                 self.saveC = {}
 

@@ -6,9 +6,9 @@ import pickle
 import random
 import os
 
-def load_data():
+def load_data(path:str="session.bin"):
     try:
-        f = open("saved_game/session.bin", "rb")
+        f = open(path, "rb")
         data = pickle.load(f)
         f.close()
         return data
@@ -17,7 +17,7 @@ def load_data():
 
 def save_data(data, path:str="session.bin"):
     try:
-        f = open("saved_game/session.bin","wb")
+        f = open(path,"wb")
         pickle.dump(data, f)
         f.close()
         return data
