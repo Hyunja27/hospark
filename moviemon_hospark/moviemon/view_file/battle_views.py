@@ -42,14 +42,15 @@ def get_mon_info(id):
     mon_info['director'] = dict_mon[id]['director']
     mon_info['plot'] = dict_mon[id]['plot']
     mon_info['poster'] = dict_mon[id]['poster']
+    catch_or_not()
     
 
 
 def catch_or_not():
     g = G_Data.load(load_data())
     c = 50 -  (mon_info['rating'] * 10) + (g.get_strength() * 5)
-    if c < 10: c = 10
-    if c > 90: c = 90
+    if c < 1: c = 1.0
+    if c > 90: c = 90.0
     mon_info['winnig'] = c
     if random.randint(0, 100) <= c: return True 
     else: return False
@@ -116,7 +117,6 @@ def press_A(request, id):
                     g.captured_list.append(g.left_moviemon.pop(i))
                     break
             save_data(g.dump())
-            print("\n\n[", len(g.captured_list), "]\n\n")
             return redirect('situation_cap')
     context['missed'] = "Holy shit..."
     save_data(g.dump())
