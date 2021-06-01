@@ -2,18 +2,22 @@ from django.http import request
 from django.shortcuts import render, redirect
 from ..movie_data import movie_total
 from django.urls import path, include
+from ..middlewares.loadSessionMiddleware import loadSession_middleware
+from ..utils.game_data import G_Data, load_data, save_data
 from ..settings import basic_data
+import random
 
+g = G_Data.load(load_data())
 class Index():
     def __init__(self, index):
         self.index = index
     def press_left(self):
         if (self.index < 0) :
-            self.index = len(basic_data.CAPTURE_MON_LIST)
+            self.index = len(g.captured_list) - 1
         else :
             self.index = self.index - 1
     def press_right(self):
-        if (self.index == len(basic_data.CAPTURE_MON_LIST)) :
+        if (self.index == len(g.captured_list) - 1):
             self.index = 0
         else :
             self.index = self.index + 1
@@ -21,12 +25,11 @@ class Index():
 index = Index(0)
 
 def views_movies(request):
-
     dict_cap_mon = {}
-    for i in basic_data.CAPTURE_MON_LIST:
+    print("[",g.captured_list,"]")
+    for i in g.captured_list:
         for key, values in i.items() :
             dict_cap_mon[key] = values
-    dic_movie = movie_total.cleaning_db()
     movie_ls = []
     movie_dec_ls = []
     for id, data in dict_cap_mon.items():
@@ -42,9 +45,9 @@ def views_movies(request):
         movie_dec_ls.append(
             movie_dex(movie_ls[prev], movie_ls[now], movie_ls[next]))
     if request.GET.get('key', None) is not None:
-        return get_id(request, index, movie_ls[index.num].imdbID)
+        return get_id(request, index, movie_ls[index.index].imdbID)
     tmp = {
-        'movie': movie_dec_ls[index.num]
+        'movie': movie_dec_ls[index.index]
     }
     return render(request, 'pages/Moviedex.html', tmp)
 

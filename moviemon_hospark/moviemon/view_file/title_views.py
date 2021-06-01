@@ -27,6 +27,7 @@ def press_A(request):
     g = G_Data.load(load_data())
     for index, (key, elem) in enumerate(g.moviemon.items()):
         basic_data.TOTAL_MON_LIST.append({key : elem})
+    print(basic_data.TOTAL_MON_LIST)
     tmp = []
     while len(basic_data.IN_GAME_MON_LIST) < 15:
         pick = random.randint(0, len(basic_data.TOTAL_MON_LIST) - 1)
