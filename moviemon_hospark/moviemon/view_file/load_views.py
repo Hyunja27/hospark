@@ -38,12 +38,9 @@ class Index():
         path = "./moviemon/saved_game/"
         for file in sorted(os.listdir(path)):
             if re.match(regex, file) is not None:
-                save_data(self.g.dump())
-                print("[", str(file), "]")
                 try:
-                    f = open(path + file, "rb")
-                    f.close()
-                    load_data(path+file)
+                    data = load_data(path+file)
+                    save_data(data)
                     return('Worldmap_page')
                 except Exception as e:
                     return ('Load')
@@ -56,19 +53,20 @@ class Index():
         path = "./moviemon/saved_game/"
         for file in sorted(os.listdir(path)):
             if re.match(a_regex, file) is not None:
-                self.loadA = load_data()
-                return
+                self.loadA = load_data(path+file)
+                break
             else:
                 self.loadA = {}
         for file in sorted(os.listdir(path)):
             if re.match(b_regex, file) is not None:
-                self.loadB = load_data()
+                self.loadB = load_data(path+file)
+                break
             else:
                 self.loadB = {}
         for file in sorted(os.listdir(path)):
             if re.match(c_regex, file) is not None:
-                # loadC = load_data(path + file)
-                self.loadC = load_data()
+                self.loadC = load_data(path+file)
+                break
             else:
                 self.loadC = {}
 
@@ -77,8 +75,6 @@ index = Index(0, 0)
 
 
 def views_Load(request):
-    if request.GET.get('key', None) is not None:
-        return get_id(request, index)
     color = [0, 0, 0]
     color[index.index] = "#ffd700"
     index.input_load()
@@ -105,6 +101,8 @@ def views_Load(request):
         "load_B": b,
         "load_C": c,
     }
+    if request.GET.get('key', None) is not None:
+        return get_id(request, index)
     return render(request, 'pages/Load.html', tmp)
 
 
@@ -121,5 +119,5 @@ def get_id(request, index):
         t = index.press_A()
         return (redirect(t))
     elif id == "B":
-        return redirect('Titlescreen_page')
+        return redirect('Worldmap_page')
     return redirect(request.path)
