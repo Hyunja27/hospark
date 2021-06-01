@@ -60,10 +60,8 @@ class G_Data():
     #     pick = random.randrange(0, rest)
     #     return self.moviemon[pick]
 
-    # def get_strength(self):
-    #     rest = len(self.moviemon) - len(self.captured_list)
-    #     pick = random.randrange(0,rest) 
-    #     return self.moviemon[pick]
+    def get_strength(self):
+        return len(self.captured_list)
 
 
     def load_default_settings():

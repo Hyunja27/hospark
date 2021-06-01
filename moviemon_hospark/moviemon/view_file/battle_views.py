@@ -22,7 +22,8 @@ mon_info = {
     'title': 0,
     'year': 0,
     'directer': 0,
-    'plot': 0
+    'plot': 0,
+    'winnig': 0
 }
 
 
@@ -40,6 +41,18 @@ def get_mon_info(id):
     mon_info['year'] = dict_mon[id]['year']
     mon_info['director'] = dict_mon[id]['director']
     mon_info['plot'] = dict_mon[id]['plot']
+    mon_info['poster'] = dict_mon[id]['poster']
+    
+
+
+def catch_or_not():
+    g = G_Data.load(load_data())
+    c = 50 -  (mon_info['rating'] * 10) + (g.get_strength() * 5)
+    if c < 10: c = 10
+    if c > 90: c = 90
+    mon_info['winnig'] = c
+    if random.randint(0, 100) <= c: return True 
+    else: return False
 
 def toss_coin():
     return random.randint(0,1)
@@ -81,15 +94,32 @@ def press_down(request):
 
 
 def press_A(request, id):
-    g = G_Data.load(load_data())
+    g:G_Data = G_Data.load(load_data())
     context = {'mon_id': id,
            'ballnum': g.movieballCount,
            'ch_a': "8px",
-            'ch_b': "0px"}
+            'ch_b': "0px",
+            'poster': mon_info['poster'],
+            'winnig': mon_info['winnig'],
+            'strength': g.get_strength()
+            }
     if battlemenu['a'] == 0:
         battlemenu['b'] = 0
         battlemenu['a'] = 1
         return render(request, 'pages/Battle.html', context)
+    caught = None
+    if g.movieballCount > 0:
+        g.movieballCount -= 1
+        if catch_or_not() is True:
+            for i, dili in enumerate(g.left_moviemon):
+                if dili.get(id):
+                    g.captured_list.append(g.left_moviemon.pop(i))
+                    break
+            save_data(g.dump())
+            print("\n\n[", len(g.captured_list), "]\n\n")
+            return redirect('situation_cap')
+    context['missed'] = "Holy shit..."
+    save_data(g.dump())
     return render(request, 'pages/Battle.html', context)
 
 
@@ -99,10 +129,15 @@ def press_B(request, id):
     context = {'mon_id': id,
            'ballnum': g.movieballCount,
            'ch_a': "0px",
-            'ch_b': "8px"}
+            'ch_b': "8px",
+            'poster': mon_info['poster'],
+            'winnig': mon_info['winnig'],
+            'strength': g.get_strength()
+            }
     if battlemenu['b'] == 0:
         battlemenu['a'] = 0
         battlemenu['b'] = 1
+        context['missed'] = "Holy shit..."
         return render(request, 'pages/Battle.html', context)
     return redirect('Worldmap_page')
 
@@ -155,13 +190,19 @@ def Worldmap(request):
 
 
 def Battle(request, id):
-    print("\n\n[[", id, "]]\n\n")
+    get_mon_info(id)
     key = request.GET.get('key', None)
     if key is not None:
         return get_id(request, id)
     g = G_Data.load(load_data())
     context = {'mon_id': id,
-               'ballnum': g.movieballCount}
+           'ballnum': g.movieballCount,
+           'ch_a': "8px",
+            'ch_b': "0px",
+            'poster': mon_info['poster'],
+            'winnig': mon_info['winnig'],
+            'strength': g.get_strength()
+            }
     return render(request, 'pages/Battle.html', context)
 
 
