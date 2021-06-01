@@ -6,21 +6,23 @@ from ..utils.game_data import G_Data, load_data, save_data
 
 
 class Index():
-    g = G_Data.load(load_data())
-    def __init__(self, index):
+    def __init__(self, index, len):
         self.index = index
+        self.len = len
     def press_left(self):
         if (self.index == 0) :
-            self.index = len(self.g.captured_list) - 1
+            self.index = self.len - 1
         else :
             self.index = self.index - 1
+        
     def press_right(self):
-        if (self.index == len(self.g.captured_list) - 1):
+        if self.index == self.len - 1:
             self.index = 0
         else :
             self.index = self.index + 1
 
-index = Index(0)
+index = Index(0,0)
+
 
 def views_movies(request):
     g = G_Data.load(load_data())
@@ -42,22 +44,14 @@ def views_movies(request):
             prev = len(movie_ls) - 1
         if (i == len(movie_ls) - 1):
             next = 0
-        if now == next and prev == now :
-            movie_dec_ls.append(movie_dex(0, movie_ls[now], 0))
-        elif len(g.captured_list) == 2 :
-            movie_dec_ls.append(movie_dex(0, movie_ls[now], movie_ls[next]))
-        else :
-            movie_dec_ls.append(movie_dex(movie_ls[prev], movie_ls[now], movie_ls[next]))
+        movie_dec_ls.append(movie_dex(movie_ls[prev], movie_ls[now], movie_ls[next]))
+    index.len = len(movie_ls)
     if request.GET.get('key', None) is not None:
         print(index.index)
         return get_id(request, index, movie_ls[index.index].imdbID)
-    print(index.index, len(movie_ls))
+    print(index.index, len(g.captured_list),g.captured_list, len(movie_ls))
     if not movie_dec_ls:
         id = {0}
-    elif len(movie_dec_ls) == 1 :
-        id = movie_dec_ls[0]
-    elif len(movie_dec_ls) == 2:
-        id = movie_dec_ls[index.index]
     else :
         id = movie_dec_ls[index.index]
     tmp = {
