@@ -39,13 +39,23 @@ def encounter_something(request):
                 else: ball_amount = 1
                 g.movieballCount += ball_amount
                 save_data(g.dump())
-                return redirect('situation_obt')
-        save_data(g.dump())
-        # pick = get_one_mon()
-        # id = list(g.left_moviemon[pick])[0]
-        return redirect('situation_enc')
-        # return redirect('battle/' + id)
-    return redirect(request.path)
+                try :
+                    return redirect('situation_obt')
+                except :
+                    raise Http404("redirect error")
+        elif toss_coin():   
+            save_data(g.dump())
+            # pick = get_one_mon()
+            # id = list(g.left_moviemon[pick])[0]
+            try :
+                return redirect('situation_enc')
+            except :
+                raise Http404("redirect error")
+            # return redirect('battle/' + id)
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
 
 
 def press_up(request):
@@ -57,7 +67,10 @@ def press_up(request):
             save_data(g.dump())
             return encounter_something(request)
         save_data(g.dump())
-        return redirect(request.path)
+        try :
+            return redirect(request.path)
+        except :
+            raise Http404("redirect error")
 
 
 def press_left(request):
@@ -69,7 +82,10 @@ def press_left(request):
             save_data(g.dump())
             return encounter_something(request)
         save_data(g.dump())
-        return redirect(request.path)
+        try :
+            return redirect(request.path)
+        except :
+            raise Http404("redirect error")
 
 
 def press_right(request):
@@ -81,7 +97,10 @@ def press_right(request):
             save_data(g.dump())
             return encounter_something(request)
         save_data(g.dump())
-        return redirect(request.path)
+        try :
+            return redirect(request.path)
+        except :
+            raise Http404("redirect error")
 
 
 def press_down(request):
@@ -93,28 +112,43 @@ def press_down(request):
             save_data(g.dump())
             return encounter_something(request)
         save_data(g.dump())
-        return redirect(request.path)
+        try :
+            return redirect(request.path)
+        except :
+            raise Http404("redirect error")
 
 
 def press_A(request):
     if (situation['battle'] == 1 or situation['battle'] == 1):
         print("A")
-    return redirect(request.path)
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
 
 
 def press_B(request):
     if (situation['battle'] == 1 or situation['battle'] == 1):
         print("B")
-    return redirect(request.path)
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
 
 
 def press_Start(request):
     print("Start")
-    return redirect('Option')
+    try :
+        return redirect('Option')
+    except :
+        raise Http404("redirect error")
 
 
 def press_Select(request):
-    return redirect('Moviedex')
+    try :
+        return redirect('Moviedex')
+    except :
+        raise Http404("redirect error")
 
 
 def get_id(request):
@@ -135,7 +169,10 @@ def get_id(request):
         return press_Start(request)
     elif id == "Select":
         return press_Select(request)
-    return redirect(request.path)
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
 
 
 def Titlescreen(request):
@@ -196,3 +233,5 @@ def Load(request):
     if id is not None:
         return get_id(request)
     return render(request, 'pages/options/load_game.html')
+
+  

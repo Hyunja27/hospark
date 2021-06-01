@@ -20,7 +20,11 @@ def press_A(request):
         print(context)
         return render(request, 'pages/Options.html', context)
     print("A")
-    return redirect('Save')
+    try :
+        return redirect('Save')
+    except :
+        raise Http404("redirect error")
+
 
 
 def press_B(request):
@@ -34,10 +38,16 @@ def press_B(request):
         print(context)
         return render(request, 'pages/Options.html', context)
     print("B")
-    return redirect('Titlescreen_page') 
+    try :
+        return redirect('Titlescreen_page')
+    except :
+        raise Http404("redirect error")
 
 def press_Start(request):
-    return redirect('Worldmap_page') 
+    try :
+        return redirect('Worldmap_page')
+    except :
+        raise Http404("redirect error")
 
 
 def get_id(request):
@@ -48,7 +58,10 @@ def get_id(request):
         return press_B(request)
     elif id == "Start":
         return press_Start(request)
-    return redirect(request.path)
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
 
 
 def Titlescreen(request):

@@ -1,3 +1,4 @@
+from django.http import request, Http404
 import random 
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
@@ -40,12 +41,13 @@ def press_A(request):
     g.left_moviemon = basic_data.IN_GAME_MON_LIST
     g.captured_list = []
     save_data(g.dump())
-
     # print("\n\n\n[1[", g.get_random_movie(),"]]")
     # print("\n[2[", g.get_strength(), "]]\n")
     # print("\n[3[ key: ", rr, g.get_movie(rr),"]]\n\n\n")
-
-    return redirect('Worldmap_page')
+    try :
+        return redirect('Worldmap_page')
+    except :
+        raise Http404("this is an error")
 
 def press_B(request):
     if titlemenu['b'] == 0:
@@ -57,8 +59,10 @@ def press_B(request):
         }
         print(context)
         return render(request, 'pages/Titlescreen.html', context)
-
-    return redirect('Load') 
+    try :
+        return redirect('Load')
+    except :
+        raise Http404("this is an error")
 
 
 def get_id(request):
@@ -67,7 +71,10 @@ def get_id(request):
         return press_A(request)
     elif id == "B":
         return press_B(request)
-    return redirect(request.path)
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("this is an error")
 
 
 def Titlescreen(request):

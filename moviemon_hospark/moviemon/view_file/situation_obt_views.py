@@ -73,15 +73,14 @@ def press_down(request):
 
 def press_A(request):
     g = G_Data.load(load_data())
-    if situation['cap'] == 0:
-        situation['cap'] == 1
-        if situationmanu['a'] == 0:
-            situationmanu['a'] = 1
-            context = {
+    context = {
                 'ch_a': "17px",
                 'ball_total': g.movieballCount,
                 'Power': "Su--per"
             }
+    if situation['cap'] == 0:
+        if situationmanu['a'] == 0:
+            situationmanu['a'] = 1
             if situation['encount'] == 1:
                 pick = get_one_mon()
                 id = list(g.left_moviemon[pick])[0]
@@ -90,9 +89,8 @@ def press_A(request):
                 return render(request, 'pages/Obtain.html', context)
     print("A")
     situationmanu['a'] = 0
-    situation['cap'] = 1
     if situation['cap'] == 1:
-        return redirect(request.path)
+        return render(request, 'pages/Capture.html', context)
     return redirect('Worldmap_page')
 
 

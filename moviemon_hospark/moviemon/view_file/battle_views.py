@@ -74,24 +74,38 @@ def encounter_something(request):
                 # print("\n\n====ToTal_ball :", g.movieballCount, "====\n\n")
                 # return render(request, 'pages/Obtain.html', context)
             # mon_index = random.randint(0, len(g.left_moviemon))
-
-    return redirect(request.path)
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
 
 
 def press_up(request):
-    return redirect(request.path)
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
 
 
 def press_left(request):
-    return redirect(request.path)
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
 
 
 def press_right(request):
-    return redirect(request.path)
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
 
 
 def press_down(request):
-    return redirect(request.path)
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
 
 
 def press_A(request, id):
@@ -124,6 +138,7 @@ def press_A(request, id):
             save_data(g.dump())
             return redirect('situation_cap')
     context['missed'] = "Holy shit... Missed!"
+    context['runch'] = "Launch Movieball !"
     save_data(g.dump())
     if len(g.left_moviemon) == 0 :
         return redirect('End')
@@ -148,16 +163,25 @@ def press_B(request, id):
         battlemenu['b'] = 1
         context['missed'] = "Holy shit..."
         return render(request, 'pages/Battle.html', context)
-    return redirect('Worldmap_page')
+    try :
+        return redirect('Worldmap_page')
+    except :
+        raise Http404("redirect error")
 
 def press_Start(request):
     print("Start")
-    return redirect('Option')
+    try :
+        return redirect('Option')
+    except :
+        raise Http404("redirect error")
 
 
 def press_Select(request):
     print("Select")
-    return redirect('Moviedex')
+    try :
+        return redirect('Moviedex')
+    except :
+        raise Http404("redirect error")
 
 
 def get_id(request, id):
@@ -178,7 +202,10 @@ def get_id(request, id):
         return press_Start(request)
     elif k == "Select":
         return press_Select(request)
-    return redirect(request.path)
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
 
 
 def Titlescreen(request):
