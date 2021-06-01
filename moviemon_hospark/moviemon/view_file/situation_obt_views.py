@@ -10,7 +10,8 @@ import random
 situation = {
     'cap': 0,
     'getball': 0,
-    'encount': 0
+    'encount': 0,
+    'recap':0
 }
 
 situationmanu = {
@@ -72,30 +73,41 @@ def press_down(request):
 
 def press_A(request):
     g = G_Data.load(load_data())
-    if situationmanu['a'] == 0:
-        situationmanu['a'] = 1
-        context = {
-            'ch_a': "17px",
-            'ball_total': g.movieballCount,
-            'Power': "Su--per"
-        }
-        if situation['cap'] == 1:
-            situation['cap'] = 0
-            return render(request, 'pages/Capture.html', context)
-        elif situation['encount'] == 1:
-            pick = get_one_mon()
-            id = list(g.left_moviemon[pick])[0]
-            return redirect('battle/' + id)
-        else:
-            return render(request, 'pages/Obtain.html', context)
-            
+    if situation['cap'] == 0:
+        situation['cap'] == 1
+        if situationmanu['a'] == 0:
+            situationmanu['a'] = 1
+            context = {
+                'ch_a': "17px",
+                'ball_total': g.movieballCount,
+                'Power': "Su--per"
+            }
+            if situation['encount'] == 1:
+                pick = get_one_mon()
+                id = list(g.left_moviemon[pick])[0]
+                return redirect('battle/' + id)
+            else:
+                return render(request, 'pages/Obtain.html', context)
     print("A")
     situationmanu['a'] = 0
     situation['cap'] = 1
+    if situation['cap'] == 1:
+        return redirect(request.path)
     return redirect('Worldmap_page')
 
 
 def press_B(request):
+    if situation['cap'] == 1:
+        context = {
+                'Power': "Su--per"
+            }
+        if situation['recap'] == 0:
+            situation['recap'] = 1
+            return render(request, 'pages/Capture.html', context)
+        else:
+            situation['recap'] = 0
+            situation['cap'] = 0
+            return redirect('Worldmap_page')
     print("B")
     return redirect(request.path)
 
