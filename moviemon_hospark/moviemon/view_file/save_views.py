@@ -40,23 +40,17 @@ class Index():
         for file in sorted(os.listdir(path)):
             if re.match(regex, file) is not None:
                 os.remove(path + file)
-<<<<<<< HEAD
         # load_data(self.g.dump())
         file = ""
         f = open("session.bin", "rb")
         data = pickle.load(f)
         f.close()
-=======
         data = load_data()
->>>>>>> d05ad276f569ed4c331115ac07c8e8aa3e1371e1
         file = type + "_" + str(len(data["captured_list"])) + "_" + "15.mmg"
         path = "./moviemon/saved_game/" + file
         with open(path, "wb") as f:
             pickle.dump(data, f)
-<<<<<<< HEAD
         # self.input_save()
-=======
->>>>>>> d05ad276f569ed4c331115ac07c8e8aa3e1371e1
         return ('Titlescreen_page')
 
     def check(self, saveA={}, saveB={}, saveC={}):
@@ -83,10 +77,6 @@ class Index():
                 break ;
             else:
                 self.saveC = {}
-<<<<<<< HEAD
-=======
-
->>>>>>> d05ad276f569ed4c331115ac07c8e8aa3e1371e1
 
 index = Index(0, 0)
 

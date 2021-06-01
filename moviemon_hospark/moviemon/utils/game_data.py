@@ -13,7 +13,7 @@ def load_data():
         f.close()
         return data
     except Exception as e:
-        return {}
+        return None
 
 def save_data(data, path:str="session.bin"):
     try:

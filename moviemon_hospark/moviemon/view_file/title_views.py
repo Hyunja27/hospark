@@ -38,15 +38,12 @@ def press_A(request):
     g.total_moviemon = basic_data.TOTAL_MON_LIST
     g.left_moviemon = basic_data.IN_GAME_MON_LIST
     g.captured_list = []
-<<<<<<< HEAD
     save_data(g.dump())
 
     # print("\n\n\n[1[", g.get_random_movie(),"]]")
     # print("\n[2[", g.get_strength(), "]]\n")
     # print("\n[3[ key: ", rr, g.get_movie(rr),"]]\n\n\n")
 
-=======
->>>>>>> 525768a614d1c6d5861537a6580789970329814c
     return redirect('Worldmap_page')
 
 def press_B(request):
