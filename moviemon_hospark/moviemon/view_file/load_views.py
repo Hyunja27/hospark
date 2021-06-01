@@ -41,7 +41,7 @@ class Index():
                 try:
                     data = load_data(path+file)
                     save_data(data)
-                    return('Worldmap_page')
+                    return('load_game')
                 except Exception as e:
                     return ('Load')
         return ('Load')
@@ -74,7 +74,7 @@ class Index():
 index = Index(0, 0)
 
 
-def views_Load(request):
+def views_Load(request, load):
     color = [0, 0, 0]
     color[index.index] = "#ffd700"
     index.input_load()
@@ -101,6 +101,10 @@ def views_Load(request):
         "load_B": b,
         "load_C": c,
     }
+    if  load == "load" :
+        tmp["load"] = "start"
+    else :
+        tmob["load"] = "load"
     if request.GET.get('key', None) is not None:
         return get_id(request, index)
     return render(request, 'pages/Load.html', tmp)
@@ -115,7 +119,6 @@ def get_id(request, index):
         print("right")
         index.press_right()
     elif id == "A":
-        print("A")
         t = index.press_A()
         return (redirect(t))
     elif id == "B":
