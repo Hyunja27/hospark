@@ -38,22 +38,10 @@ class Index():
         path = "./moviemon/saved_game/"
         for file in sorted(os.listdir(path)):
             if re.match(regex, file) is not None:
-<<<<<<< HEAD
-                save_data(self.g.dump())
-                print("@@@[", str(file), "]")
-                try:
-                    f = open(path + file, "rb")
-                    data = pickle.load(f)
-                    f.close()
-                    save_data(data)
-                    print("a")
-                    return('Worldmap_page')
-=======
                 try:
                     data = load_data(path+file)
                     save_data(data)
                     return('load_game')
->>>>>>> d05ad276f569ed4c331115ac07c8e8aa3e1371e1
                 except Exception as e:
                     print(e)
                     return ('Load')
@@ -78,12 +66,8 @@ class Index():
                 self.loadB = {}
         for file in sorted(os.listdir(path)):
             if re.match(c_regex, file) is not None:
-<<<<<<< HEAD
-                self.loadC = load_data()
-=======
                 self.loadC = load_data(path+file)
                 break
->>>>>>> d05ad276f569ed4c331115ac07c8e8aa3e1371e1
             else:
                 self.loadC = {}
 
@@ -121,7 +105,7 @@ def views_Load(request, load):
     if  load == "load" :
         tmp["load"] = "start"
     else :
-        tmob["load"] = "load"
+        tmp["load"] = "load"
     if request.GET.get('key', None) is not None:
         return get_id(request, index)
     return render(request, 'pages/Load.html', tmp)
