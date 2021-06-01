@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/hopark/Desktop/hopark/django/hospark_fork/rush00_venv"
+set -gx VIRTUAL_ENV "/Users/spark/Box_main_cursus/11_python_piscine/rush00_last/hospark/rush00_venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
