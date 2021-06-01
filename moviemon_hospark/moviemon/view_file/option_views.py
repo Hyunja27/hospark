@@ -1,6 +1,6 @@
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
-from . import title_views, save_load_views, world_views
+from . import title_views, load_views, world_views
 # Create your views here.
 
 titlemenu = {

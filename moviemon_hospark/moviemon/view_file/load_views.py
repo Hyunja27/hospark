@@ -1,7 +1,7 @@
 import pickle
 from tkinter.constants import NO, NONE
 from django.shortcuts import render, redirect
-from ..utils.game_data import G_Data, load_data, load_data
+from ..utils.game_data import G_Data, load_data, save_data
 import sys
 import os
 import re
@@ -9,12 +9,11 @@ import re
 
 class Index():
     g = G_Data.load(load_data())
-    def __init__(self, index, saveA={}, saveB={}, saveC={}):
+    def __init__(self, index, loadA={}, loadB={}, loadC={}):
         self.index = index
-        self.saveA = saveA
-        self.saveB = saveB
-        self.saveC = saveC
-
+        self.loadA = loadA
+        self.loadB = loadB
+        self.loadC = loadC
 
     def press_left(self):
         if (self.index == 0):
@@ -39,82 +38,74 @@ class Index():
         path = "./moviemon/saved_game/"
         for file in sorted(os.listdir(path)):
             if re.match(regex, file) is not None:
-                os.remove(path + file)
-                load_data(self.g.dump())
+                save_data(self.g.dump())
                 print("[", str(file), "]")
-        load_data(self.g.dump())
-        file = ""
-        f = open("session.bin", "rb")
-        data = pickle.load(f)
-        f.close()
-        file = type + "_" + str(len(data["captured_list"])) + "_" + "15.mmg"
-        path = "./moviemon/saved_game/" + file
-        with open(path, "wb") as f:
-            pickle.dump(data, f)
-        self.input_save()
-        return ('Titlescreen_page')
+                try:
+                    f = open(path + file, "rb")
+                    f.close()
+                    load_data(path+file)
+                    return('Worldmap_page')
+                except Exception as e:
+                    return ('Load')
+        return ('Load')
 
-    def input_save(self, saveA={}, saveB={}, saveC={}):
+    def input_load(self, loadA={}, loadB={}, loadC={}):
         a_regex = re.compile("slota")
         b_regex = re.compile("slotb")
         c_regex = re.compile("slotc")
         path = "./moviemon/saved_game/"
-
         for file in sorted(os.listdir(path)):
             if re.match(a_regex, file) is not None:
-                self.saveA = load_data()
+                self.loadA = load_data()
                 return
             else:
-                print("@@@@@@@@!!!!!!!!!!!!")
-                self.saveA = {}
+                self.loadA = {}
         for file in sorted(os.listdir(path)):
             if re.match(b_regex, file) is not None:
-                self.saveB = load_data()
-                return
+                self.loadB = load_data()
             else:
-                self.saveB = {}
+                self.loadB = {}
         for file in sorted(os.listdir(path)):
             if re.match(c_regex, file) is not None:
-                self.saveC = load_data()
-                return
+                # loadC = load_data(path + file)
+                self.loadC = load_data()
             else:
-                self.saveC = {}
-        
+                self.loadC = {}
 
 
 index = Index(0, 0)
 
 
-def views_Save(request):
+def views_Load(request):
     if request.GET.get('key', None) is not None:
         return get_id(request, index)
     color = [0, 0, 0]
     color[index.index] = "#ffd700"
-    index.input_save()
+    index.input_load()
     a = "x"
     b = "x"
     c = "x"
-    if not index.saveA:
+    if not index.loadA:
         pass
     else:
-        a = str(len(index.saveA["captured_list"]))
-    if not index.saveB:
+        a = str(len(index.loadA["captured_list"]))
+    if not index.loadB:
         pass
     else:
-        b = str(len(index.saveB["captured_list"]))
-    if not index.saveC:
+        b = str(len(index.loadB["captured_list"]))
+    if not index.loadC:
         pass
     else:
-        c = str(len(index.saveC["captured_list"]))
+        c = str(len(index.loadC["captured_list"]))
     tmp = {
         'A': color[0],
         'B': color[1],
         'C': color[2],
-        "save_A": a,
-        "save_B": b,
-        "save_C": c,
+        "load_A": a,
+        "load_B": b,
+        "load_C": c,
     }
-    return render(request, 'pages/Save.html', tmp)
+    return render(request, 'pages/Load.html', tmp)
 
 
 def get_id(request, index):
@@ -128,8 +119,6 @@ def get_id(request, index):
     elif id == "A":
         print("A")
         t = index.press_A()
-        print("@")
-        print(t)
         return (redirect(t))
     elif id == "B":
         return redirect('Titlescreen_page')

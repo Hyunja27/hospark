@@ -53,8 +53,6 @@ def press_up(request):
         g = G_Data.load(load_data())
         if (g.py > 0):
             g.py -= 1
-        print("up ", g.py)
-        print("mon: ",len(g.left_moviemon),"ball: ",g.movieballCount)
         if len(g.left_moviemon) > 0:
             save_data(g.dump())
             return encounter_something(request)
@@ -67,8 +65,6 @@ def press_left(request):
         g = G_Data.load(load_data())
         if (g.px > 0):
             g.px -= 1
-        print("left ", g.px)
-        print("mon: ",len(g.left_moviemon))
         if len(g.left_moviemon) > 0:
             save_data(g.dump())
             return encounter_something(request)
@@ -81,8 +77,6 @@ def press_right(request):
         g = G_Data.load(load_data())
         if (g.px < X_MAX):
             g.px += 1
-        print("right ", g.px)
-        print("mon: ",len(g.left_moviemon))
         if len(g.left_moviemon) > 0:
             save_data(g.dump())
             return encounter_something(request)
@@ -95,8 +89,6 @@ def press_down(request):
         g = G_Data.load(load_data())
         if (g.py < Y_MAX):
             g.py += 1
-        print("down ", g.py)
-        print("mon: ",len(g.left_moviemon))
         if len(g.left_moviemon) > 0:
             save_data(g.dump())
             return encounter_something(request)
@@ -122,7 +114,6 @@ def press_Start(request):
 
 
 def press_Select(request):
-    print("Select")
     return redirect('Moviedex')
 
 

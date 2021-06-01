@@ -48,7 +48,8 @@ def get_mon_info(id):
 
 def catch_or_not():
     g = G_Data.load(load_data())
-    c = 50 -  (mon_info['rating'] * 10) + (g.get_strength() * 5)
+    # c = 50 -  (mon_info['rating'] * 10) + (g.get_strength() * 5)
+    c = 90
     if c < 1: c = 1.0
     if c > 90: c = 90.0
     mon_info['winnig'] = c
@@ -114,12 +115,16 @@ def press_A(request, id):
         if catch_or_not() is True:
             for i, dili in enumerate(g.left_moviemon):
                 if dili.get(id):
-                    g.captured_list.append(g.left_moviemon.pop(i))
+                    g.captured_list.append(dili)
+                    g.left_moviemon.remove(dili)
+                    print("@@@",len(g.captured_list))
                     break
             save_data(g.dump())
             return redirect('situation_cap')
     context['missed'] = "Holy shit..."
     save_data(g.dump())
+    if len(g.left_moviemon) == 0 :
+        return redirect('End')
     return render(request, 'pages/Battle.html', context)
 
 

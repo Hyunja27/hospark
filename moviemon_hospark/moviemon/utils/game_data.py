@@ -6,20 +6,19 @@ import pickle
 import random
 import os
 
-def load_data(path):
-    print(os.getcwd()+path)
+def load_data(path:str="session.bin"):
     try:
         f = open(path, "rb")
         data = pickle.load(f)
         f.close()
         return data
     except Exception as e:
-        print("**error**",e)
-        return None
+        return {}
 
-def save_data(data):
+def save_data(data, path:str="session.bin"):
+    
     try:
-        f = open("session.bin", "wb")
+        f = open(path, "wb")
         pickle.dump(data, f)
         f.close()
         return data
@@ -63,13 +62,8 @@ class G_Data():
     #     pick = random.randrange(0, rest)
     #     return self.moviemon[pick]
 
-<<<<<<< HEAD
-    # def get_strength(self):
-=======
     def get_strength(self):
         return len(self.captured_list)
-
->>>>>>> df4900ebf8da55bfe0946f52d39011569edb8ff9
 
     def load_default_settings():
         # return G_Data.load(load_data())
