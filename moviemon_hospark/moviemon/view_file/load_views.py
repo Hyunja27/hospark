@@ -48,6 +48,7 @@ class Index():
                         self.rr = 0
                         return('Worldmap_page')
                 except Exception as e:
+                    print(e)
                     return ('Load')
         return ('Load')
 
@@ -138,6 +139,7 @@ def views_Load_2(request):
         "load_C": c,
         "load":"load"
     }
+
     tmp['load']="load"
     index.rr = 1
     if request.GET.get('key', None) is not None:
@@ -154,6 +156,7 @@ def get_id(request, index):
         index.press_right()
     elif id == "A":
         t = index.press_A()
+        print(t)
         return (redirect(t))
     elif id == "B":
         return redirect('Worldmap_page')

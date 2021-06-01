@@ -24,6 +24,7 @@ def press_A(request):
     print("\n\n\n\n\n\n  == gettering Many Movies...... Wait Some Seconds..  ==\n\n\n\n\n\n")
     save_data(G_Data.load_default_settings().dump())
     g = G_Data.load(load_data())
+    print(g)
     for index, (key, elem) in enumerate(g.moviemon.items()):
         basic_data.TOTAL_MON_LIST.append({key : elem})
         # rr = key
@@ -37,12 +38,15 @@ def press_A(request):
     g.total_moviemon = basic_data.TOTAL_MON_LIST
     g.left_moviemon = basic_data.IN_GAME_MON_LIST
     g.captured_list = []
+<<<<<<< HEAD
     save_data(g.dump())
 
     # print("\n\n\n[1[", g.get_random_movie(),"]]")
     # print("\n[2[", g.get_strength(), "]]\n")
     # print("\n[3[ key: ", rr, g.get_movie(rr),"]]\n\n\n")
 
+=======
+>>>>>>> 525768a614d1c6d5861537a6580789970329814c
     return redirect('Worldmap_page')
 
 def press_B(request):
@@ -75,6 +79,8 @@ def Titlescreen(request):
     return render(request, 'pages/Titlescreen.html')
 
 def Worldmap(request):
+    g = G_Data.load(load_data())
+    print(g)
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)

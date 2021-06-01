@@ -147,6 +147,7 @@ def Titlescreen(request):
 @loadSession_middleware
 def Worldmap(request):
     g = G_Data.load(load_data())
+    print("[",g,"]")
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
