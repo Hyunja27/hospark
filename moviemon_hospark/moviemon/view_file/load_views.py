@@ -149,15 +149,12 @@ def views_Load_2(request):
 def get_id(request, index):
     id = request.GET.get('key', None)
     if id == "left":
-        print("left")
         index.press_left()
     elif id == "right":
-        print("right")
         index.press_right()
     elif id == "A":
         t = index.press_A()
-        print(t)
         return (redirect(t))
     elif id == "B":
-        return redirect('Worldmap_page')
+        return redirect('Titlescreen_page')
     return redirect(request.path)

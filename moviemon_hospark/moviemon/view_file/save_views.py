@@ -40,7 +40,6 @@ class Index():
         for file in sorted(os.listdir(path)):
             if re.match(regex, file) is not None:
                 os.remove(path + file)
-        # load_data(self.g.dump())
         file = ""
         f = open("session.bin", "rb")
         data = pickle.load(f)
@@ -50,7 +49,6 @@ class Index():
         path = "./moviemon/saved_game/" + file
         with open(path, "wb") as f:
             pickle.dump(data, f)
-        # self.input_save()
         return ('Titlescreen_page')
 
     def check(self, saveA={}, saveB={}, saveC={}):
@@ -129,5 +127,5 @@ def get_id(request, index):
         return (redirect(t))
     elif id == "B":
         index.index = 0
-        return redirect('Titlescreen_page')
+        return redirect('Option')
     return redirect(request.path)
