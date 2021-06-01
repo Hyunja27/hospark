@@ -75,23 +75,23 @@ def Titlescreen(request):
         return get_id(request)
     return render(request, 'pages/Titlescreen.html')
 
-def Worldmap(request):
-    g = G_Data.load(load_data())
-    print(g)
-    id = request.GET.get('key', None)
-    if id is not None:
-        return get_id(request)
-    return render(request, 'pages/Worldmap.html')
+# def Worldmap(request):
+#     g = G_Data.load(load_data())
+#     print(g)
+#     id = request.GET.get('key', None)
+#     if id is not None:
+#         return get_id(request)
+#     return render(request, 'pages/Worldmap.html')
 
-def Save(request):
-    id = request.GET.get('key', None)
-    if id is not None:
-        return get_id(request)
-    return render(request, 'pages/options/save_game.html')
+# def Save(request):
+#     id = request.GET.get('key', None)
+#     if id is not None:
+#         return get_id(request)
+#     return render(request, 'pages/options/save_game.html')
 
 
-def Load(request):
-    id = request.GET.get('key', None)
-    if id is not None:
-        return get_id(request)
-    return render(request, 'pages/options/load_game.html')
+# def Load(request):
+#     id = request.GET.get('key', None)
+#     if id is not None:
+#         return get_id(request)
+#     return render(request, 'pages/options/load_game.html')

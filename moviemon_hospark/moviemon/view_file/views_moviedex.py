@@ -4,7 +4,6 @@ from django.urls import path, include
 from ..middlewares.loadSessionMiddleware import loadSession_middleware
 from ..utils.game_data import G_Data, load_data, save_data
 
-
 class Index():
     def __init__(self, index, len):
         self.index = index

@@ -1,4 +1,3 @@
-from . import views
 from .view_file import battle_views, situation_obt_views, title_views, world_views, option_views, save_views, views_moviedex, views_moviedex_detail, load_views, end_views
 from django.shortcuts import render, redirect
 from django.urls import path, include

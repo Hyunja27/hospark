@@ -119,7 +119,7 @@ def press_A(request, id):
                 if dili.get(id):
                     g.captured_list.append(dili)
                     g.left_moviemon.remove(dili)
-                    print("@@@",len(g.captured_list))
+                    # print("@@@",len(g.captured_list))
                     break
             save_data(g.dump())
             return redirect('situation_cap')
