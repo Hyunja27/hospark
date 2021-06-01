@@ -40,9 +40,7 @@ class Index():
         for file in sorted(os.listdir(path)):
             if re.match(regex, file) is not None:
                 os.remove(path + file)
-                load_data(self.g.dump())
-                print("[", str(file), "]")
-        load_data(self.g.dump())
+        # load_data(self.g.dump())
         file = ""
         f = open("session.bin", "rb")
         data = pickle.load(f)
@@ -51,10 +49,10 @@ class Index():
         path = "./moviemon/saved_game/" + file
         with open(path, "wb") as f:
             pickle.dump(data, f)
-        self.input_save()
+        # self.input_save()
         return ('Titlescreen_page')
 
-    def input_save(self, saveA={}, saveB={}, saveC={}):
+    def check(self, saveA={}, saveB={}, saveC={}):
         a_regex = re.compile("slota")
         b_regex = re.compile("slotb")
         c_regex = re.compile("slotc")
@@ -79,18 +77,15 @@ class Index():
                 return
             else:
                 self.saveC = {}
-        
-
 
 index = Index(0, 0)
-
 
 def views_Save(request):
     if request.GET.get('key', None) is not None:
         return get_id(request, index)
     color = [0, 0, 0]
     color[index.index] = "#ffd700"
-    index.input_save()
+    index.check()
     a = "x"
     b = "x"
     c = "x"
@@ -130,7 +125,9 @@ def get_id(request, index):
         t = index.press_A()
         print("@")
         print(t)
+        index.index = 0
         return (redirect(t))
     elif id == "B":
+        index.index = 0
         return redirect('Titlescreen_page')
     return redirect(request.path)

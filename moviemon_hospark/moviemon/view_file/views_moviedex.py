@@ -8,7 +8,7 @@ from ..utils.game_data import G_Data, load_data, save_data
 class Index():
     g = G_Data.load(load_data())
     def __init__(self, index):
-        self.index = index
+        self.index = 0
     def press_left(self):
         if (self.index is 0) :
             self.index = len(self.g.captured_list) - 1
@@ -51,18 +51,18 @@ def views_movies(request):
     if request.GET.get('key', None) is not None:
         print(index.index)
         return get_id(request, index, movie_ls[index.index].imdbID)
-    print(index.index, len(movie_ls))
     if not movie_dec_ls:
         id = {0}
     elif len(movie_dec_ls) == 1 :
         id = movie_dec_ls[0]
     elif len(movie_dec_ls) == 2:
+        print(len(movie_dec_ls), index.index)
         id = movie_dec_ls[index.index]
     else :
         id = movie_dec_ls[index.index]
     tmp = {
         'movie': id,
-        "index" : index.index,
+        "index" : index.index + 1,
         "total" : len(movie_dec_ls)
     }
     return render(request, 'pages/Moviedex.html', tmp)
@@ -97,6 +97,7 @@ def get_id(request, index, imdbID):
         print("right")
         index.press_right()
     elif id == "Select":
+        index.index = 0
         return redirect('Worldmap_page')
     elif id == "A":
         return redirect(request.path+"/"+imdbID)

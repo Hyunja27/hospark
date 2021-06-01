@@ -39,13 +39,16 @@ class Index():
         for file in sorted(os.listdir(path)):
             if re.match(regex, file) is not None:
                 save_data(self.g.dump())
-                print("[", str(file), "]")
+                print("@@@[", str(file), "]")
                 try:
                     f = open(path + file, "rb")
+                    data = pickle.load(f)
                     f.close()
-                    load_data(path+file)
+                    save_data(data)
+                    print("a")
                     return('Worldmap_page')
                 except Exception as e:
+                    print(e)
                     return ('Load')
         return ('Load')
 
@@ -67,7 +70,6 @@ class Index():
                 self.loadB = {}
         for file in sorted(os.listdir(path)):
             if re.match(c_regex, file) is not None:
-                # loadC = load_data(path + file)
                 self.loadC = load_data()
             else:
                 self.loadC = {}
@@ -119,6 +121,7 @@ def get_id(request, index):
     elif id == "A":
         print("A")
         t = index.press_A()
+        print(t)
         return (redirect(t))
     elif id == "B":
         return redirect('Titlescreen_page')
