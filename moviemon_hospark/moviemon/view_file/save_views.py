@@ -40,16 +40,23 @@ class Index():
         for file in sorted(os.listdir(path)):
             if re.match(regex, file) is not None:
                 os.remove(path + file)
+<<<<<<< HEAD
         # load_data(self.g.dump())
         file = ""
         f = open("session.bin", "rb")
         data = pickle.load(f)
         f.close()
+=======
+        data = load_data()
+>>>>>>> d05ad276f569ed4c331115ac07c8e8aa3e1371e1
         file = type + "_" + str(len(data["captured_list"])) + "_" + "15.mmg"
         path = "./moviemon/saved_game/" + file
         with open(path, "wb") as f:
             pickle.dump(data, f)
+<<<<<<< HEAD
         # self.input_save()
+=======
+>>>>>>> d05ad276f569ed4c331115ac07c8e8aa3e1371e1
         return ('Titlescreen_page')
 
     def check(self, saveA={}, saveB={}, saveC={}):
@@ -57,26 +64,29 @@ class Index():
         b_regex = re.compile("slotb")
         c_regex = re.compile("slotc")
         path = "./moviemon/saved_game/"
-
         for file in sorted(os.listdir(path)):
             if re.match(a_regex, file) is not None:
-                self.saveA = load_data()
-                return
+                self.saveA = load_data(path+file)
+                break ;
             else:
-                print("@@@@@@@@!!!!!!!!!!!!")
                 self.saveA = {}
         for file in sorted(os.listdir(path)):
             if re.match(b_regex, file) is not None:
-                self.saveB = load_data()
-                return
+                self.saveB = load_data(path+file)
+                print(self.saveB)
+                break ;
             else:
                 self.saveB = {}
         for file in sorted(os.listdir(path)):
             if re.match(c_regex, file) is not None:
-                self.saveC = load_data()
-                return
+                self.saveC = load_data(path+file)
+                break ;
             else:
                 self.saveC = {}
+<<<<<<< HEAD
+=======
+
+>>>>>>> d05ad276f569ed4c331115ac07c8e8aa3e1371e1
 
 index = Index(0, 0)
 
@@ -101,6 +111,7 @@ def views_Save(request):
         pass
     else:
         c = str(len(index.saveC["captured_list"]))
+    
     tmp = {
         'A': color[0],
         'B': color[1],
@@ -123,7 +134,6 @@ def get_id(request, index):
     elif id == "A":
         print("A")
         t = index.press_A()
-        print("@")
         print(t)
         index.index = 0
         return (redirect(t))

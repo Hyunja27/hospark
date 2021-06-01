@@ -38,6 +38,7 @@ class Index():
         path = "./moviemon/saved_game/"
         for file in sorted(os.listdir(path)):
             if re.match(regex, file) is not None:
+<<<<<<< HEAD
                 save_data(self.g.dump())
                 print("@@@[", str(file), "]")
                 try:
@@ -47,6 +48,12 @@ class Index():
                     save_data(data)
                     print("a")
                     return('Worldmap_page')
+=======
+                try:
+                    data = load_data(path+file)
+                    save_data(data)
+                    return('load_game')
+>>>>>>> d05ad276f569ed4c331115ac07c8e8aa3e1371e1
                 except Exception as e:
                     print(e)
                     return ('Load')
@@ -59,18 +66,24 @@ class Index():
         path = "./moviemon/saved_game/"
         for file in sorted(os.listdir(path)):
             if re.match(a_regex, file) is not None:
-                self.loadA = load_data()
-                return
+                self.loadA = load_data(path+file)
+                break
             else:
                 self.loadA = {}
         for file in sorted(os.listdir(path)):
             if re.match(b_regex, file) is not None:
-                self.loadB = load_data()
+                self.loadB = load_data(path+file)
+                break
             else:
                 self.loadB = {}
         for file in sorted(os.listdir(path)):
             if re.match(c_regex, file) is not None:
+<<<<<<< HEAD
                 self.loadC = load_data()
+=======
+                self.loadC = load_data(path+file)
+                break
+>>>>>>> d05ad276f569ed4c331115ac07c8e8aa3e1371e1
             else:
                 self.loadC = {}
 
@@ -78,9 +91,7 @@ class Index():
 index = Index(0, 0)
 
 
-def views_Load(request):
-    if request.GET.get('key', None) is not None:
-        return get_id(request, index)
+def views_Load(request, load):
     color = [0, 0, 0]
     color[index.index] = "#ffd700"
     index.input_load()
@@ -107,6 +118,12 @@ def views_Load(request):
         "load_B": b,
         "load_C": c,
     }
+    if  load == "load" :
+        tmp["load"] = "start"
+    else :
+        tmob["load"] = "load"
+    if request.GET.get('key', None) is not None:
+        return get_id(request, index)
     return render(request, 'pages/Load.html', tmp)
 
 
@@ -119,10 +136,9 @@ def get_id(request, index):
         print("right")
         index.press_right()
     elif id == "A":
-        print("A")
         t = index.press_A()
         print(t)
         return (redirect(t))
     elif id == "B":
-        return redirect('Titlescreen_page')
+        return redirect('Worldmap_page')
     return redirect(request.path)

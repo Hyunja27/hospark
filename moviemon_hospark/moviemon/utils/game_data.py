@@ -15,8 +15,12 @@ def load_data():
     except Exception as e:
         return {}
 
+<<<<<<< HEAD
 def save_data(data):
     
+=======
+def save_data(data, path:str="session.bin"):
+>>>>>>> d05ad276f569ed4c331115ac07c8e8aa3e1371e1
     try:
         f = open("saved_game/session.bin","wb")
         pickle.dump(data, f)
@@ -47,6 +51,11 @@ class G_Data():
     moviemon: dict = {}
     total_moviemon: list = []
     movieballCount: int = basic_data.START_BALL_AMOUNT
+<<<<<<< HEAD
+=======
+    strength : int = len(captured_list)
+
+>>>>>>> d05ad276f569ed4c331115ac07c8e8aa3e1371e1
     def dump(self):
         return {
             "px": self.px,
@@ -55,7 +64,8 @@ class G_Data():
             "left_moviemon": self.left_moviemon,
             "total_moviemon": self.total_moviemon,
             "moviemon": self.moviemon,
-            "movieballCount" : self.movieballCount
+            "movieballCount" : self.movieballCount,
+            "strength" : self.strength
         }
 
     def load(data):
@@ -66,7 +76,7 @@ class G_Data():
         result.left_moviemon = data["left_moviemon"]
         result.total_moviemon = data["total_moviemon"]
         result.movieballCount = data["movieballCount"]
-        result.moviemon = data["moviemon"]
+        result.strength = len(data["captured_list"])
         return result
 
     # def get_random_movie(self):

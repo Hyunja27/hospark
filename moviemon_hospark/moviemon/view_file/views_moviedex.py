@@ -10,12 +10,12 @@ class Index():
     def __init__(self, index):
         self.index = 0
     def press_left(self):
-        if (self.index is 0) :
+        if (self.index == 0) :
             self.index = len(self.g.captured_list) - 1
         else :
             self.index = self.index - 1
     def press_right(self):
-        if (self.index is len(self.g.captured_list) - 1):
+        if (self.index == len(self.g.captured_list) - 1):
             self.index = 0
         else :
             self.index = self.index + 1
