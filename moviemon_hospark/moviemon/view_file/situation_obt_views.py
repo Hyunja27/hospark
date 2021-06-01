@@ -1,5 +1,5 @@
 from tkinter.constants import NO
-from django.http import request
+from django.http import request, Http404
 from django.shortcuts import render, redirect
 from ..middlewares.loadSessionMiddleware import loadSession_middleware
 from ..utils.game_data import G_Data, load_data, save_data
@@ -181,7 +181,6 @@ def Detail(request):
         return get_id(request)
     return render(request, 'pages/Moviedex.html')
 
-
 @loadSession_middleware
 def Situation_obt(request):
     situation['cap'] = 0
@@ -222,22 +221,22 @@ def Situation_enc(request):
     return render(request, 'pages/Encount.html', context)
 
 
-# def Option(request):
-#     id = request.GET.get('key', None)
-#     if id is not None:
-#         return get_id(request)
-#     return render(request, 'pages/Options.html')
+def Option(request):
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/Options.html')
 
 
-# def Save(request):
-#     id = request.GET.get('key', None)
-#     if id is not None:
-#         return get_id(request)
-#     return render(request, 'pages/options/save_game.html')
+def Save(request):
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/options/save_game.html')
 
 
-# def Load(request):
-#     id = request.GET.get('key', None)
-#     if id is not None:
-#         return get_id(request)
-#     return render(request, 'pages/options/load_game.html')
+def Load(request):
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/options/load_game.html')

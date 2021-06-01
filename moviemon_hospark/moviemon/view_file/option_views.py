@@ -1,6 +1,7 @@
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
 from . import title_views, load_views, world_views
+from django.http import Http404
 # Create your views here.
 
 titlemenu = {

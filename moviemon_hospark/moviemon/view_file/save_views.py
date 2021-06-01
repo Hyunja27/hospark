@@ -1,6 +1,9 @@
 import pickle
+import django
+from django.http import Http404
 from tkinter.constants import NO, NONE
 from django.shortcuts import render, redirect
+
 from ..utils.game_data import G_Data, load_data, load_data
 import sys
 import os
@@ -127,5 +130,12 @@ def get_id(request, index):
         return (redirect(t))
     elif id == "B":
         index.index = 0
-        return redirect('Option')
-    return redirect(request.path)
+        try :
+            return redirect('Option')
+        except :
+           raise Http404("redirect error")
+    try : 
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
+        

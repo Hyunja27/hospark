@@ -1,4 +1,4 @@
-from django.http import request
+from django.http import request, Http404
 from django.shortcuts import render, redirect
 from django.urls import path, include
 from ..settings import basic_data
@@ -13,5 +13,11 @@ def get_id(request):
     print(id)
     if id == "B":
         print("B")
-        return redirect("Moviedex")
-    return redirect(request.path)
+        try :
+            return redirect("Moviedex")
+        except :
+            raise Http404("redirect error")
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")

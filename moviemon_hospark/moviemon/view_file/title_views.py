@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from ..middlewares.loadSessionMiddleware import loadSession_middleware
 from ..utils.game_data import G_Data, load_data, save_data
 from ..settings import basic_data
+
 # Create your views here.
 
 titlemenu = {
