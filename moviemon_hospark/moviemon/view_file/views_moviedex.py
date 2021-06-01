@@ -5,18 +5,18 @@ from django.urls import path, include
 from ..settings import basic_data
 
 class Index():
-    def __init__(self, num):
-        self.num = num
+    def __init__(self, index):
+        self.index = index
     def press_left(self):
-        if (self.num < 0) :
-            self.num = len(basic_data.CAPTURE_MON_LIST)
+        if (self.index < 0) :
+            self.index = len(basic_data.CAPTURE_MON_LIST)
         else :
-            self.num = self.num - 1
+            self.index = self.index - 1
     def press_right(self):
-        if (self.num == len(basic_data.CAPTURE_MON_LIST)) :
-            self.num = 0
+        if (self.index == len(basic_data.CAPTURE_MON_LIST)) :
+            self.index = 0
         else :
-            self.num = self.num + 1
+            self.index = self.index + 1
 
 index = Index(0)
 

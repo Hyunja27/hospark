@@ -4,14 +4,17 @@ import requests
 import json
 import pickle
 import random
+import os
 
-def load_data():
+def load_data(path):
+    print(os.getcwd()+path)
     try:
-        f = open("session.bin", "rb")
+        f = open(path, "rb")
         data = pickle.load(f)
         f.close()
         return data
-    except:
+    except Exception as e:
+        print("**error**",e)
         return None
 
 def save_data(data):
