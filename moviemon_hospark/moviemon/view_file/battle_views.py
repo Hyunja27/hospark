@@ -48,8 +48,8 @@ def get_mon_info(id):
 
 def catch_or_not():
     g = G_Data.load(load_data())
-    c = 50 -  (mon_info['rating'] * 10) + (g.get_strength() * 5)
-    # c = 90
+    # c = 50 -  (mon_info['rating'] * 10) + (g.get_strength() * 5)
+    c = 90
     if c < 1: c = 1.0
     if c > 90: c = 90.0
     mon_info['winnig'] = c

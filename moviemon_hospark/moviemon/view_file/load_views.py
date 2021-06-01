@@ -5,10 +5,11 @@ from ..utils.game_data import G_Data, load_data, save_data
 import sys
 import os
 import re
-
-
 class Index():
     g = G_Data.load(load_data())
+
+    rr = 0
+    
     def __init__(self, index, loadA={}, loadB={}, loadC={}):
         self.index = index
         self.loadA = loadA
@@ -41,7 +42,11 @@ class Index():
                 try:
                     data = load_data(path+file)
                     save_data(data)
-                    return('load_game')
+                    if self.rr == 0:
+                        return('Load_2')
+                    else:
+                        self.rr = 0
+                        return('Worldmap_page')
                 except Exception as e:
                     return ('Load')
         return ('Load')
@@ -74,9 +79,40 @@ class Index():
 index = Index(0, 0)
 
 
-def views_Load(request, load):
+def views_Load(request):
     color = [0, 0, 0]
     color[index.index] = "#ffd700"
+    index.input_load()
+    a = "x"
+    b = "x"
+    c = "x"
+    if not index.loadA:
+        pass
+    else:
+        a = str(len(index.loadA["captured_list"]))
+    if not index.loadB:
+        pass
+    else:
+        b = str(len(index.loadB["captured_list"]))
+    if not index.loadC:
+        pass
+    else:
+        c = str(len(index.loadC["captured_list"]))
+    tmp_dic = {
+        'A': color[0],
+        'B': color[1],
+        'C': color[2],
+        "load_A": a,
+        "load_B": b,
+        "load_C": c,
+    }
+    if request.GET.get('key', None) is not None:
+        return get_id(request, index)
+    return render(request, 'pages/Load.html', tmp_dic)
+
+def views_Load_2(request):
+    color = [0, 0, 0]
+    color[index.index] = "#009000"
     index.input_load()
     a = "x"
     b = "x"
@@ -100,15 +136,13 @@ def views_Load(request, load):
         "load_A": a,
         "load_B": b,
         "load_C": c,
+        "load":"load"
     }
-    if  load == "load" :
-        tmp["load"] = "start"
-    else :
-        tmob["load"] = "load"
+    tmp['load']="load"
+    index.rr = 1
     if request.GET.get('key', None) is not None:
         return get_id(request, index)
     return render(request, 'pages/Load.html', tmp)
-
 
 def get_id(request, index):
     id = request.GET.get('key', None)
