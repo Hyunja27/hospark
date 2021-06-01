@@ -1,5 +1,5 @@
 from tkinter.constants import NO
-from django.http import request
+from django.http import request, Http404
 from django.shortcuts import render, redirect
 from ..middlewares.loadSessionMiddleware import loadSession_middleware
 from ..utils.game_data import G_Data, load_data, save_data

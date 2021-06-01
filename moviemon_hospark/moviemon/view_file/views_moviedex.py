@@ -1,4 +1,4 @@
-from django.http import request
+from django.http import request, Http404
 from django.shortcuts import render, redirect
 from django.urls import path, include
 from ..middlewares.loadSessionMiddleware import loadSession_middleware
@@ -92,6 +92,13 @@ def get_id(request, index, imdbID):
         index.index = 0
         return redirect('Worldmap_page')
     elif id == "A":
-        return redirect(request.path+"/"+imdbID)
-    return redirect(request.path)
+        try : 
+            return redirect(request.path+"/"+imdbID)
+        except :
+            raise Http404("redirect error")
+    try :
+        return redirect(request.path)
+    except :
+        raise Http404("redirect error")
+        
 

@@ -1,5 +1,5 @@
 from tkinter.constants import NO
-from django.http import request
+from django.http import request, Http404
 from django.shortcuts import render, redirect
 from ..middlewares.loadSessionMiddleware import loadSession_middleware
 from ..utils.game_data import G_Data, load_data, save_data
@@ -156,43 +156,43 @@ def Worldmap(request):
     return render(request, 'pages/Worldmap.html', context)
 
 
-# def Battle(request):
-#     id = request.GET.get('key', None)
-#     if id is not None:
-#         return get_id(request)
-#     return render(request, 'pages/Battle.html')
+def Battle(request):
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/Battle.html')
 
 
-# def Moviedex(request):
-#     id = request.GET.get('key', None)
-#     if id is not None:
-#         return get_id(request)
-#     return render(request, 'pages/Moviedex.html')
+def Moviedex(request):
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/Moviedex.html')
 
 
-# def Detail(request):
-#     id = request.GET.get('key', None)
-#     if id is not None:
-#         return get_id(request)
-#     return render(request, 'pages/Moviedex.html')
+def Detail(request):
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/Moviedex.html')
 
 
-# def Option(request):
-#     id = request.GET.get('key', None)
-#     if id is not None:
-#         return get_id(request)
-#     return render(request, 'pages/Options.html')
+def Option(request):
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/Options.html')
 
 
-# def Save(request):
-#     id = request.GET.get('key', None)
-#     if id is not None:
-#         return get_id(request)
-#     return render(request, 'pages/options/save_game.html')
+def Save(request):
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/options/save_game.html')
 
 
-# def Load(request):
-#     id = request.GET.get('key', None)
-#     if id is not None:
-#         return get_id(request)
-#     return render(request, 'pages/options/load_game.html')
+def Load(request):
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    return render(request, 'pages/options/load_game.html')
