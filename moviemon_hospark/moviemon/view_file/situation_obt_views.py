@@ -8,20 +8,22 @@ import random
 # Create your views here.
 
 situation = {
-    'battle': 0,
+    'cap': 0,
     'getball': 0,
 }
 
 situationmanu = {
-    'a' : 0,
-    'b' : 0
+    'a': 0,
+    'b': 0
 }
 
 X_MAX = 9
 Y_MAX = 9
 
+
 def toss_coin():
-    return random.randint(0,1)
+    return random.randint(0, 1)
+
 
 def encounter_something(request):
     situation['getball'] = 1
@@ -29,8 +31,10 @@ def encounter_something(request):
     if toss_coin():
         if toss_coin():
             if toss_coin() and g.movieballCount < 42:
-                if toss_coin(): ball_amount = 2
-                else: ball_amount = 1
+                if toss_coin():
+                    ball_amount = 2
+                else:
+                    ball_amount = 1
                 g.movieballCount += ball_amount
                 save_data(g.dump())
                 return request('situation')
@@ -63,14 +67,22 @@ def press_down(request):
 
 def press_A(request):
     g = G_Data.load(load_data())
+    print(situationmanu['a'])
     if situationmanu['a'] == 0:
         situationmanu['a'] = 1
         context = {
             'ch_a': "17px",
-            'ball_total': g.movieballCount
+            'ball_total': g.movieballCount,
+            'Power': "Su--per"
         }
-        return render(request, 'pages/Obtain.html', context)
+        if situation['cap'] == 1:
+            situation['cap'] = 0
+            return render(request, 'pages/Capture.html', context)
+        else:
+            return render(request, 'pages/Obtain.html', context)
     print("A")
+    situationmanu['a'] = 0
+    situation['cap'] = 1
     return redirect('Worldmap_page')
 
 
@@ -116,6 +128,7 @@ def Titlescreen(request):
         return get_id(request)
     return render(request, 'pages/Titlescreen.html')
 
+
 @loadSession_middleware
 def Worldmap(request):
     g = G_Data.load(load_data())
@@ -147,15 +160,31 @@ def Detail(request):
         return get_id(request)
     return render(request, 'pages/Moviedex.html')
 
+
 def Situation_obt(request):
+    situation['cap'] = 0
     g = G_Data.load(load_data())
     id = request.GET.get('key', None)
     if id is not None:
         return get_id(request)
     context = {
-            'ball_total': g.movieballCount
-        }
+        'ball_total': g.movieballCount
+    }
     return render(request, 'pages/Obtain.html', context)
+
+
+def Situation_cap(request):
+    situation['cap'] = 1
+    g = G_Data.load(load_data())
+    id = request.GET.get('key', None)
+    if id is not None:
+        return get_id(request)
+    context = {
+        'power': "S--uper"
+    }
+    situationmanu['a'] = 0
+    return render(request, 'pages/Capture.html', context)
+
 
 def Option(request):
     id = request.GET.get('key', None)

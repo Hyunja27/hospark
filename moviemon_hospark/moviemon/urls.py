@@ -11,7 +11,16 @@ urlpatterns = [
     path('moviedex/<str:imdbID>', views_moviedex_detail.views_detail, name="Detail"),
     path('options', option_views.Option, name="Option"),
     path('situation_obt', situation_obt_views.Situation_obt, name="situation_obt"),
+    path('situation_cap', situation_obt_views.Situation_cap, name="situation_cap"),
     path('options/save_game', save_views.Save, name="Save"),
     path('options/load_game', save_load_views.Load, name="Load"),
 ]
 
+#   context = {'mon_id': id,
+#            'ballnum': g.movieballCount,
+#            'ch_a': "8px",
+#             'ch_b': "0px",
+#             'poster': mon_info['poster'],
+#             'winnig': mon_info['winnig'],
+#             'strength': g.get_strength()
+#             }

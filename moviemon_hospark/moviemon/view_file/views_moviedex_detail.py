@@ -2,13 +2,15 @@ from django.http import request
 from django.shortcuts import render, redirect
 from ..movie_data import movie_total
 from django.urls import path, include
+from ..middlewares.loadSessionMiddleware import loadSession_middleware
+from ..utils.game_data import G_Data, load_data, save_data
 from ..settings import basic_data
 from .views_moviedex import movie_inf
 
 def views_detail(request, imdbID):
-
+    g = G_Data.load(load_data())
     dict_cap_mon = {}
-    for i in basic_data.CAPTURE_MON_LIST:
+    for i in g.captured_list:
         for key, values in i.items() :
             dict_cap_mon[key] = values
     
