@@ -103,7 +103,8 @@ def press_A(request, id):
             'ch_b': "0px",
             'poster': mon_info['poster'],
             'winnig': mon_info['winnig'],
-            'strength': g.get_strength()
+            'strength': g.get_strength(),
+            'rating': mon_info['rating']
             }
     if battlemenu['a'] == 0:
         battlemenu['b'] = 0
@@ -139,7 +140,8 @@ def press_B(request, id):
             'ch_b': "8px",
             'poster': mon_info['poster'],
             'winnig': mon_info['winnig'],
-            'strength': g.get_strength()
+            'strength': g.get_strength(),
+            'rating': mon_info['rating']
             }
     if battlemenu['b'] == 0:
         battlemenu['a'] = 0
@@ -208,7 +210,8 @@ def Battle(request, id):
             'ch_b': "0px",
             'poster': mon_info['poster'],
             'winnig': mon_info['winnig'],
-            'strength': g.get_strength()
+            'strength': g.get_strength(),
+            'rating': mon_info['rating']
             }
     return render(request, 'pages/Battle.html', context)
 
