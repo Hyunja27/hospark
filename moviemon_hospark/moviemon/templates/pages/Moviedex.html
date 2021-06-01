@@ -9,9 +9,13 @@
          height: 100px;
     }
 </style>
-<div>
-	<img src="{{movie.prev.Poster}}" style="position=absolute; top:0px; width:200px;height: 300px;"></img>
-	<img src="{{movie.now.Poster}}" style="position=absolute; top:0px; width:270px;height: 400px;"></img>
-	<img src="{{movie.next.Poster}}" style="position=absolute; top:200px; width:200px;height: 300px;"></img>
-</div>
+<br>
+<table>
+	<td><img src="{{movie.prev.Poster}}" style="position=absolute; top:0px; width:200px;height: 300px;"></img></td>
+	<td><img src="{{movie.now.Poster}}" style="position=absolute; top:0px; width:250px;height: 350px; border:10px solid; border-color:blue"></img></td>
+	<td><img src="{{movie.next.Poster}}" style="position=absolute; top:200px; width:200px;height: 300px;"></img></td>
+</table>
+	<h3>&nbsp&nbsp[A]&nbsp:&nbsp MORE INFORMATION</h3>
+	<h3>&nbsp&nbsp[SELECT]&nbsp :&nbsp BACK</h3>
+
 {% endblock content%}

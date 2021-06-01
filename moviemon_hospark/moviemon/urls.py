@@ -1,5 +1,5 @@
 from . import views
-from .view_file import battle_views, situation_obt_views, title_views, save_load_views, world_views, option_views, save_views, views_moviedex, views_moviedex_detail
+from .view_file import battle_views, situation_obt_views, title_views, save_load_views, world_views, option_views, save_views, views_moviedex, views_moviedex_detail, save_load_views
 from django.shortcuts import render, redirect
 from django.urls import path, include
 
@@ -12,6 +12,6 @@ urlpatterns = [
     path('options', option_views.Option, name="Option"),
     path('situation_obt', situation_obt_views.Situation_obt, name="situation_obt"),
     path('options/save_game', save_views.Save, name="Save"),
-    path('options/load_game', save_load_views.Load, name="Load"),
+    path('options/load_game', save_load_views.views_Load, name="Load"),
 ]
 

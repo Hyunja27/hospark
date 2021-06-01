@@ -1,136 +1,78 @@
 from tkinter.constants import NO
 from django.shortcuts import render, redirect
+import sys
+import os
+import re
 # Create your views here.
 
-saveloadmenu = {
-    'a': 1,
-}
 
-def press_up(request):
-    if saveloadmenu['a'] != 1:
-        saveloadmenu['a'] -= 1
-    if saveloadmenu['a'] == 1:
-        context = {
-            'ch_a': "14px",
-            'ch_b': "0px",
-            'ch_c': "0px"
-        }
-    else:
-        context = {
-            'ch_a': "0px",
-            'ch_b': "14px",
-            'ch_c': "0px"
-        }
-    return render(request, 'pages/Load.html', context)
+class Index():
+    def __init__(self, index, load):
+        self.index = index
+        self.load = load
 
-def press_left(request):
-    print("left")
+    def press_left(self):
+        if (self.index == 0):
+            self.index = 2
+        else:
+            self.index = self.index - 1
 
+    def press_right(self):
+        if (self.index == 2):
+            self.index = 0
+        else:
+            self.index = self.index + 1
 
-def press_right(request):
-    print("right")
+    def press_A(self):
+        print("a")
 
+    def input_load(self, load):
+        a_regex = re.compile("slota")
+        b_regex = re.compile("slotb")
+        c_regex = re.compile("slotc")
+        directory = os.path.dirname("./moviemon/saved_game/")
+        for file in sorted(os.listdir(directory)):
+            if re.match(a_regex, file) is not None:
+                load["A"] = re.match(a_regex, file)
+        for file in sorted(os.listdir(directory)):
+            if re.match(b_regex, file) is not None:
+                load["B"] = re.match(b_regex, file)
+        for file in sorted(os.listdir(directory)):
+            if re.match(c_regex, file) is not None:
+                load["C"] = re.match(c_regex, file)
+        self.load = load
 
-def press_down(request):
-    if saveloadmenu['a'] != 3:
-        saveloadmenu['a'] += 1
-    if saveloadmenu['a'] == 2:
-        context = {
-            'ch_a': "0px",
-            'ch_b': "14px",
-            'ch_c': "0px"
-        }
-    else:
-        context = {
-            'ch_a': "0px",
-            'ch_b': "0px",
-            'ch_c': "14px"
-        }
-    return render(request, 'pages/Load.html', context)
+index = Index(0, 0)
 
 
-def press_A(request):
-        
-        return redirect('Titlescreen_page')
-    # return Titlescreen(request)
+def views_Load(request):
+    if request.GET.get('key', None) is not None:
+        return get_id(request, index)
+    color = [0, 0, 0]
+    print(index.index)
+    color[index.index] = "#ffd700"
+    tmp = {
+        'A': color[0],
+        'B': color[1],
+        'C': color[2],
+        "load" : index.load
+    }
+    return render(request, 'pages/Load.html', tmp)
 
-
-def press_B(request):
-        return redirect('Titlescreen_page')
-        # return render(request, 'pages/Titlescreen.html', context)
-
-def press_Start(request):
-    print("Start")
-
-
-def press_Select(request):
-    print("Select")
-
-
-def get_id(request):
+def get_id(request, index):
     id = request.GET.get('key', None)
-    if id == "up":
-        return press_up(request)
-    elif id == "down":
-        return press_down(request)
+    load = {"A": 0, "B": 0, "C": 0}
+    index.input_load(load)
+    if id == "left":
+        print("left")
+        index.press_left()
+    elif id == "right":
+        print("right")
+        index.press_right()
     elif id == "A":
-        return press_A(request)
+        print("A")
+        index.press_A()
     elif id == "B":
-        return press_B(request)
+        print("B")
+        return redirect('Titlescreen_page')
     return redirect(request.path)
-
-
-def Titlescreen(request):
-    id = request.GET.get('key', None)
-    if id is not None:
-        return get_id(request)
-    return render(request, 'pages/Titlescreen.html')
-
-
-def Worldmap(request):
-    id = request.GET.get('key', None)
-    if id is not None:
-        return get_id(request)
-    return render(request, 'pages/Worldmap.html')
-
-
-def Battle(request):
-    id = request.GET.get('key', None)
-    if id is not None:
-        return get_id(request)
-    return render(request, 'pages/Battle.html')
-
-
-def Moviedex(request):
-    id = request.GET.get('key', None)
-    if id is not None:
-        return get_id(request)
-    return render(request, 'pages/Moviedex.html')
-
-
-def Detail(request):
-    id = request.GET.get('key', None)
-    if id is not None:
-        return get_id(request)
-    return render(request, 'pages/Moviedex.html')
-
-
-def Option(request):
-    id = request.GET.get('key', None)
-    if id is not None:
-        return get_id(request)
-    return render(request, 'pages/Options.html')
-
-
-def Save(request):
-    id = request.GET.get('key', None)
-    if id is not None:
-        return get_id(request)
-    return render(request, 'pages/Save.html')
-
-
-def Load(request):
-    id = request.GET.get('key', None)
-    if id is not None:
-        return get_id(request)
-    return render(request, 'pages/Load.html')
