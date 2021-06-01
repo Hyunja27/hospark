@@ -169,7 +169,7 @@ def Detail(request):
         return get_id(request)
     return render(request, 'pages/Moviedex.html')
 
-
+@loadSession_middleware
 def Situation_obt(request):
     situation['cap'] = 0
     g = G_Data.load(load_data())
@@ -181,7 +181,7 @@ def Situation_obt(request):
     }
     return render(request, 'pages/Obtain.html', context)
 
-
+@loadSession_middleware
 def Situation_cap(request):
     situation['cap'] = 1
     g = G_Data.load(load_data())
@@ -194,6 +194,7 @@ def Situation_cap(request):
     situationmanu['a'] = 0
     return render(request, 'pages/Capture.html', context)
 
+@loadSession_middleware
 def Situation_enc(request):
     situation['encount'] = 1
     situation['cap'] = 0

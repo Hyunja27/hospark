@@ -6,18 +6,18 @@ import pickle
 import random
 import os
 
-def load_data():
+def load_data(path:str="session.bin"):
     try:
-        f = open("saved_game/session.bin", "rb")
+        f = open(path, "rb")
         data = pickle.load(f)
         f.close()
         return data
     except Exception as e:
-        return {}
+        return None
 
 def save_data(data, path:str="session.bin"):
     try:
-        f = open("saved_game/session.bin","wb")
+        f = open(path,"wb")
         pickle.dump(data, f)
         f.close()
         return data
@@ -71,17 +71,21 @@ class G_Data():
         result.strength = len(data["captured_list"])
         return result
 
-    # def get_random_movie(self):
-    #     rest = len(self.moviemon) - len(self.captured_list)
-    #     pick = random.randrange(0, rest)
-    #     return self.moviemon[pick]
+    def get_random_movie(self):
+        pick = random.randint(0, len(self.left_moviemon) - 1)
+        return self.left_moviemon[pick]
+
+    def get_movie(self, id):
+        temp = {}
+        for i in self.total_moviemon:
+            for key, values in i.items() :
+                temp[key] = values
+        return temp[id]
 
     def get_strength(self):
         return len(self.captured_list)
 
     def load_default_settings():
-        # return G_Data.load(load_data())
-
         result = G_Data()
         URL = "http://www.omdbapi.com/"
         for id in basic_data.IMDB_LIST:

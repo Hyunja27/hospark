@@ -23,7 +23,6 @@ class Index():
 
 index = Index(0,0)
 
-
 def views_movies(request):
     g = G_Data.load(load_data())
     dict_cap_mon = {}

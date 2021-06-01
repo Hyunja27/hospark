@@ -8,7 +8,7 @@ def loadSession_middleware(view_function):
     def wrap(request, *args, **kwargs):
         data = load_data()
         if data is None:
-            return redirect("title")
+            return redirect("")
         return view_function(request, *args, **kwargs)
 
     return wrap
