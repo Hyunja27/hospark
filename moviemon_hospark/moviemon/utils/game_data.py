@@ -6,9 +6,9 @@ import pickle
 import random
 import os
 
-def load_data(path:str="session.bin"):
+def load_data():
     try:
-        f = open(path, "rb")
+        f = open("saved_game/session.bin", "rb")
         data = pickle.load(f)
         f.close()
         return data
@@ -17,13 +17,26 @@ def load_data(path:str="session.bin"):
 
 def save_data(data, path:str="session.bin"):
     try:
-        f = open(path, "wb")
+        f = open("saved_game/session.bin","wb")
         pickle.dump(data, f)
         f.close()
         return data
     except:
         return None
 
+def make_save_dir():
+    if not os.path.isdir("saved_game"):
+        os.mkdir("saved_game")
+
+def save_session_data(data):
+    make_save_dir()
+    try:
+        f = open("saved_game/session.bin", "wb")
+        pickle.dump(data, f)
+        f.close()
+        return data
+    except:
+        return None
 
 class G_Data():
     px: int = basic_data.PLAYER_INIT_POSITION[0]

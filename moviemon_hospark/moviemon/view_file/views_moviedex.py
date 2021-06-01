@@ -49,14 +49,14 @@ def views_movies(request):
     if request.GET.get('key', None) is not None:
         print(index.index)
         return get_id(request, index, movie_ls[index.index].imdbID)
-    print(index.index, len(g.captured_list),g.captured_list, len(movie_ls))
+
     if not movie_dec_ls:
         id = {0}
     else :
         id = movie_dec_ls[index.index]
     tmp = {
         'movie': id,
-        "index" : index.index,
+        "index" : index.index + 1,
         "total" : len(movie_dec_ls)
     }
     return render(request, 'pages/Moviedex.html', tmp)
